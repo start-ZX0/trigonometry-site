@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRπ - تعلم من الصفر</title>
+    <title>MRπ - الرئيسية</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,27 +11,23 @@
         <div class="logo">MRπ</div>
         <nav><a href="index.html">الصفحة الرئيسية</a></nav>
     </header>
-
-    <main class="content-wrapper">
-        <section class="visualizer-container">
-            <h3>حرك المؤشر لتغيير الزاوية: <span id="angleText">0°</span></h3>
-            <div class="graph-box">
-                <div class="axis x-axis"></div>
-                <div class="axis y-axis"></div>
-                <div id="vector" class="vector"></div>
-            </div>
-            <input type="range" id="angleSlider" min="0" max="360" value="0">
-        </section>
-
-        <aside class="notes-sidebar">
-            <h2>ملاحظات الزاوية</h2>
-            <div id="dynamicNote" class="note-card">
-                <p>ابدأ بتحريك المؤشر لرؤية خصائص الزوايا المختلفة.</p>
-            </div>
-        </aside>
-    </main>
-
+    <div class="hero-section">
+        <span class="welcome-text">مرحباً بكم</span>
+        <h1>عالم الدوال المثلثية</h1>
+        <p class="slogan">يد بيد نحو الأفضل</p>
+    </div>
+    <div class="cards-container">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2436/2436636.png" alt="تعلم">
+            <h2>تعلم من الصفر</h2>
+            <a href="learn.html" class="btn">ابدأ رحلتك</a>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="اختبار">
+            <h2>اختبار حفظي</h2>
+            <a href="quiz.html" class="btn">ابدأ الاختبار</a>
+        </div>
+    </div>
     <footer><p>© 2026 مستر باي - جميع الحقوق محفوظة</p></footer>
-    <script src="script.js"></script>
 </body>
 </html>
