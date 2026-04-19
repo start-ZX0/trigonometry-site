@@ -9,7 +9,7 @@
 <body class="learn-page">
     <header>
         <div class="logo">MRπ</div>
-        <nav><a href="index.html">الصفحة الرئيسية</a></nav>
+        <nav><a href="index.html">الرئيسية</a></nav>
     </header>
 
     <div class="breadcrumb">الرئيسية > الدوال المثلثية > تعلم من الصفر</div>
@@ -19,21 +19,23 @@
             <aside class="notes-sidebar">
                 <h3>ملاحظات هامة</h3>
                 <div id="dynamicNote" class="note-card">
-                    <p>حرك المؤشر لاستكشاف الزوايا الشهيرة.</p>
+                    <p>حرك المؤشر لاستكشاف الزوايا الحادة والقائمة.</p>
                 </div>
             </aside>
 
             <section class="visualizer">
                 <h2 id="angleDisplay">الزاوية: 0°</h2>
                 <div class="graph-wrapper">
-                    <div class="grid-background"></div>
-                    <div class="axis x-axis"><span>X</span></div>
-                    <div class="axis y-axis"><span>Y</span></div>
+                    <div class="grid-bg"></div>
+                    <div class="axis x-axis"></div>
+                    <div class="axis y-axis"></div>
                     <div id="vector" class="vector"></div>
-                    <div class="axis-label p0">0°</div>
-                    <div class="axis-label p90">90°</div>
-                    <div class="axis-label p180">180°</div>
-                    <div class="axis-label p270">270°</div>
+                    <span class="label-x">X</span>
+                    <span class="label-y">Y</span>
+                    <div class="deg-mark p0">0°</div>
+                    <div class="deg-mark p90">90°</div>
+                    <div class="deg-mark p180">180°</div>
+                    <div class="deg-mark p270">270°</div>
                 </div>
                 <div class="slider-container">
                     <input type="range" id="angleSlider" min="0" max="7" value="0">
@@ -43,17 +45,17 @@
                 </div>
             </section>
 
-            <div class="trig-display">
-                <div class="val-box"><strong>sin</strong> <span id="sinVal">0</span></div>
-                <div class="val-box"><strong>cos</strong> <span id="cosVal">1</span></div>
-                <div class="val-box"><strong>tan</strong> <span id="tanVal">0</span></div>
+            <div class="trig-values-panel">
+                <div class="val-card sin"><strong>sin:</strong> <span id="sinVal">0</span></div>
+                <div class="val-card cos"><strong>cos:</strong> <span id="cosVal">1</span></div>
+                <div class="val-card tan"><strong>tan:</strong> <span id="tanVal">0</span></div>
             </div>
         </div>
 
-        <div class="table-section">
+        <div class="table-container">
             <h3>جدول قيم النسب المثلثية للزوايا الخاصة</h3>
             <div class="table-responsive">
-                <table>
+                <table class="trig-table">
                     <thead>
                         <tr>
                             <th>الزاوية (°)</th>
@@ -68,38 +70,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>sin θ</td>
-                            <td>0</td>
-                            <td>1/2</td>
-                            <td>√2/2</td>
-                            <td>√3/2</td>
-                            <td>1</td>
-                            <td>0</td>
-                            <td>-1</td>
-                            <td>0</td>
+                        <tr class="row-sin">
+                            <td class="row-head">sin (الجيب)</td>
+                            <td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td><td>0</td><td>-1</td><td>0</td>
                         </tr>
-                        <tr>
-                            <td>cos θ</td>
-                            <td>1</td>
-                            <td>√3/2</td>
-                            <td>√2/2</td>
-                            <td>1/2</td>
-                            <td>0</td>
-                            <td>-1</td>
-                            <td>0</td>
-                            <td>1</td>
+                        <tr class="row-cos">
+                            <td class="row-head">cos (الجيب تمام)</td>
+                            <td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td><td>-1</td><td>0</td><td>1</td>
                         </tr>
-                        <tr>
-                            <td>tan θ</td>
-                            <td>0</td>
-                            <td>√3/3</td>
-                            <td>1</td>
-                            <td>√3</td>
-                            <td>غير معرف</td>
-                            <td>0</td>
-                            <td>غير معرف</td>
-                            <td>0</td>
+                        <tr class="row-tan">
+                            <td class="row-head">tan (الظل)</td>
+                            <td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>∞</td><td>0</td><td>∞</td><td>0</td>
                         </tr>
                     </tbody>
                 </table>
