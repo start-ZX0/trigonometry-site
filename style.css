@@ -6,15 +6,15 @@
     --white: #ffffff;
 }
 
-/* إصلاح جذري لمنع تداخل العناصر على الموبايل (مهم جداً) */
+/* إصلاح شامل لمنع الاعوجاج وتداخل العناصر */
 *, *::before, *::after {
-    box-sizing: border-box;
+    box-sizing: border-box; /* يضمن أن الحواف لا تزيد من حجم العنصر */
     margin: 0;
     padding: 0;
 }
 
 html, body {
-    overflow-x: hidden; /* يمنع الشاشة من التحرك يميناً ويساراً بشكل مزعج */
+    overflow-x: hidden; /* منع التمرير الأفقي تماماً */
     width: 100%;
     font-family: sans-serif;
     background: #f5f7fa;
@@ -24,25 +24,94 @@ html, body {
     flex-direction: column;
 }
 
-header { background-color: var(--blue-dark); color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+header { 
+    background-color: var(--blue-dark); 
+    color: white; 
+    padding: 1rem 5%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+}
+
 nav a { color: white; text-decoration: none; font-weight: bold; }
 
-/* تنسيقات الصفحة الرئيسية */
-.hero-section { background-color: var(--blue-main); color: white; text-align: center; padding: 60px 20px 100px; }
+/* تنسيقات الصفحة الرئيسية - إصلاح الاعوجاج */
+.hero-section { 
+    background-color: var(--blue-main); 
+    color: white; 
+    text-align: center; 
+    padding: 60px 20px 100px; 
+    width: 100%; /* ضمان عدم خروجه عن الشاشة */
+}
+
 .hero-section h1 { font-size: clamp(1.8rem, 6vw, 3.5rem); margin: 10px 0; }
-.cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1000px; margin: -50px auto 40px; padding: 0 5%; }
-.card { background: var(--white); border-radius: 15px; padding: 30px 20px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+
+.cards-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 20px; 
+    max-width: 1000px; 
+    margin: -50px auto 40px; 
+    padding: 0 20px; /* تعديل الـ padding لضمان التوازن */
+}
+
+.card { 
+    background: var(--white); 
+    border-radius: 15px; 
+    padding: 30px 20px; 
+    text-align: center; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+}
+
 .card img { width: 70px; margin-bottom: 15px; }
-.btn { background-color: var(--blue-dark); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
+
+.btn { 
+    background-color: var(--blue-dark); 
+    color: white; 
+    padding: 12px 25px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    display: inline-block; 
+    margin-top: 10px; 
+}
 
 /* تنسيقات صفحة التعلم */
-.breadcrumb { padding: 10px 5%; background: #d1e3f8; color: var(--blue-dark); font-size: 0.85rem; }
-.main-container { max-width: 1100px; margin: 20px auto; padding: 0 15px; width: 100%; }
-.visualizer-container { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; margin-bottom: 30px; }
+.breadcrumb { padding: 10px 5%; background: #d1e3f8; color: var(--blue-dark); font-size: 0.85rem; width: 100%; }
+
+.main-container { 
+    max-width: 1100px; 
+    margin: 20px auto; 
+    padding: 0 15px; 
+    width: 100%; 
+    flex-grow: 1; /* تأمين تمدد المحتوى */
+}
+
+.visualizer-container { 
+    background: var(--white); 
+    padding: 20px; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+
 .visual-layout { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: center; margin-top: 20px; }
 
-/* الدائرة الإحداثية المصغرة لتناسب الموبايل */
-.coordinate-system { width: 280px; height: 280px; max-width: 100%; background: var(--white); border: 2px solid #333; border-radius: 50%; position: relative; margin: 20px auto; overflow: visible; }
+/* الدائرة الإحداثية */
+.coordinate-system { 
+    width: 280px; 
+    height: 280px; 
+    max-width: 90vw; /* منع الخروج عن شاشة الموبايل الصغير */
+    background: var(--white); 
+    border: 2px solid #333; 
+    border-radius: 50%; 
+    position: relative; 
+    margin: 20px auto; 
+    overflow: visible; 
+}
+
 .grid-lines { position: absolute; width: 100%; height: 100%; border-radius: 50%; background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px); background-size: 20px 20px; }
 .axis { position: absolute; background: #000; z-index: 5; }
 .x-axis { width: 100%; height: 2px; top: 50%; left: 0; }
@@ -55,64 +124,59 @@ nav a { color: white; text-decoration: none; font-weight: bold; }
 .values-sidebar { display: flex; flex-direction: column; gap: 10px; min-width: 120px; }
 .v-card { background: var(--white); padding: 15px; border-radius: 10px; border-right: 5px solid var(--blue-main); box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 1rem; }
 
-/* حل مشكلة تداخل المؤشر نهائياً */
+/* المؤشر */
 .slider-wrapper { width: 100%; max-width: 500px; margin: 30px auto 10px; padding: 0 10px; }
 input[type=range] { width: 100%; cursor: pointer; }
 .slider-ticks { display: flex; justify-content: space-between; margin-top: 8px; direction: ltr; padding: 0 5px; }
 .slider-ticks span { width: 30px; text-align: center; font-size: 13px; font-weight: bold; color: var(--blue-dark); }
 
-/* الجدول الملون والاستجابة للموبايل */
-.table-container { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
+/* الجدول الاستجابي */
+.table-container { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px; width: 100%; }
 .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 15px; border-radius: 8px; }
-.trig-table { min-width: 500px; /* هذا السطر يجبر الجدول على السحب بدلاً من التشوه */ width: 100%; border-collapse: collapse; text-align: center; }
+.trig-table { min-width: 500px; width: 100%; border-collapse: collapse; text-align: center; }
 .trig-table th { background: var(--blue-dark); color: white; padding: 12px; }
 .trig-table td { padding: 10px; border: 1px solid #eee; font-weight: bold; }
 .row-sin { background-color: #e8f5e9; color: #2e7d32; } .row-cos { background-color: #fff3e0; color: #ef6c00; } .row-tan { background-color: #f3e5f5; color: #7b1fa2; }
 
 /* قوانين النسب المثلثية */
-.laws-section { margin-bottom: 30px; }
 .laws-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 15px; }
 .law-card { padding: 15px; border-radius: 10px; text-align: center; color: white; display: flex; flex-direction: column; justify-content: center; }
 .law-card h4 { font-size: 1.2rem; margin-bottom: 5px; }
 .law-card small { margin-top: 8px; opacity: 0.9; font-size: 0.8rem; }
 .blue { background: #1976d2; } .orange { background: #f57c00; } .purple { background: #7b1fa2; } .red { background: #d32f2f; } .green { background: #388e3c; } .teal { background: #00796b; }
-.core-identity-card { background: var(--white); padding: 20px; border-radius: 15px; border-top: 5px solid var(--blue-main); box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 15px; text-align: center; color: var(--blue-dark); }
+.core-identity-card { background: var(--white); padding: 20px; border-radius: 15px; border-top: 5px solid var(--blue-main); box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 15px; text-align: center; color: var(--blue-dark); width: 100%; }
 
-/* زر العودة والملاحظات */
-.nav-control-bar { margin-bottom: 15px; }
+/* زر العودة */
+.nav-control-bar { margin-bottom: 15px; width: 100%; }
 .back-link { background: var(--blue-dark); color: white; padding: 8px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; display: inline-block; }
-.tip-card { display: flex; align-items: center; background: #fff9c4; border-right: 6px solid #fbc02d; padding: 15px; border-radius: 12px; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
-.tip-content p { color: #333; font-weight: bold; margin-top: 5px; }
-.go-test-btn { background-color: var(--blue-dark); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; margin-top: 10px; }
 
-footer { text-align: center; padding: 20px; background: #e3f2fd; color: var(--blue-dark); margin-top: auto; }
+footer { text-align: center; padding: 20px; background: #e3f2fd; color: var(--blue-dark); width: 100%; margin-top: auto; }
 
 /* ------------------------------------------- */
-/* أوامر الترتيب الخاصة بشاشات الهواتف (السحر هنا) */
+/* أوامر الترتيب لشاشات الهواتف - حل الاعوجاج النهائي */
 /* ------------------------------------------- */
 @media (max-width: 768px) {
-    header { flex-direction: column; gap: 10px; }
+    header { padding: 15px 5%; }
+    .hero-section { padding: 40px 15px 80px; }
+    
+    /* منع الـ cards من الخروج عن الحدود */
+    .cards-container { 
+        margin: -40px auto 30px; 
+        padding: 0 15px;
+        grid-template-columns: 1fr; /* عمود واحد للموبايل لضمان الاستقامة */
+    }
+
     .visual-layout { flex-direction: column; gap: 15px; }
+    .values-sidebar { flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%; gap: 5px; }
+    .v-card { flex: 1 1 30%; min-width: 70px; padding: 8px; font-size: 0.8rem; }
     
-    /* جعل الصناديق الجانبية تصطف بجانب بعضها بدلاً من فوق بعضها */
-    .values-sidebar { flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%; }
-    .v-card { flex: 1 1 calc(33% - 10px); min-width: 80px; text-align: center; padding: 10px; font-size: 0.9rem; }
+    .coordinate-system { width: 220px; height: 220px; }
+    .slider-ticks span { font-size: 9px; width: auto; }
     
-    /* تصغير الدائرة لتناسب الموبايل */
-    .coordinate-system { width: 230px; height: 230px; }
-    .label { font-size: 11px; }
-    .p0 { right: -25px; } .p90 { top: -22px; } .p180 { left: -28px; } .p270 { bottom: -22px; }
-    
-    /* تصغير خطوط المؤشر لمنع التداخل */
-    .slider-ticks span { font-size: 10px; width: 25px; }
-    
-    /* ترتيب بطاقات القوانين على شكل شبكة من عمودين */
     .laws-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* أوامر للشاشات الصغيرة جداً */
 @media (max-width: 400px) {
-    .laws-grid { grid-template-columns: 1fr; } /* قانون واحد في كل سطر */
-    .tip-card { text-align: center; justify-content: center; }
-    .go-test-btn { width: 100%; text-align: center; }
+    .laws-grid { grid-template-columns: 1fr; }
+    .hero-section h1 { font-size: 1.6rem; }
 }
