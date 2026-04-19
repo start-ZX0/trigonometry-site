@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+            <p>دورات تعليمية شاملة للمبتدئين لتعلم المهارات من الأساسيات.</p>
+            <a href="learn.html" class="btn">ابدأ رحلتك</a>
+        </div>
+
+        <div class="card">
+        <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -41,21 +46,27 @@
             background-color: #1976d2;
             color: white;
             text-align: center;
-            padding: 60px 20px 150px 20px;
+            padding: 80px 20px 150px 20px;
         }
 
-        /* التعديل الأول: ترحيب فوق العنوان الرئيسي */
-        .hero-section span {
+        /* تنسيق النصوص الثلاثة */
+        .hero-section .welcome-text {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
             display: block;
-            font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 5px;
         }
 
         .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            margin-top: 0;
+            font-size: 3rem;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .hero-section .slogan {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            opacity: 0.8;
         }
 
         .cards-container {
@@ -90,14 +101,7 @@
 
         .card h2 {
             color: #333;
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -110,10 +114,6 @@
             display: inline-block;
         }
 
-        .btn:hover {
-            background-color: #0d47a1;
-        }
-
         footer {
             margin-top: auto;
             text-align: center;
@@ -123,9 +123,8 @@
         }
 
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 1.8rem; }
-            .cards-container { margin-top: -50px; }
-            .card { max-width: 90%; }
+            .hero-section h1 { font-size: 2rem; }
+            .cards-container { margin-top: -60px; }
         }
     </style>
 </head>
@@ -139,30 +138,27 @@
     </header>
 
     <div class="hero-section">
-        <span>مرحباً بكم في عالم الدوال المثلثية</span>
+        <span class="welcome-text">مرحبا بكم</span>
         <h1>عالم الدوال المثلثية</h1>
-        <p>يد بيد نحو الأفضل</p>
+        <p class="slogan">يد بيد نحو الأفضل</p>
     </div>
 
     <div class="cards-container">
         <div class="card">
             <img src="https://cdn-icons-png.flaticon.com/512/2436/2436636.png" alt="تعلم">
             <h2>تعلم من الصفر</h2>
-            <p>دورات تعليمية شاملة للمبتدئين لتعلم المهارات من الأساسيات.</p>
             <a href="learn.html" class="btn">ابدأ رحلتك</a>
         </div>
 
         <div class="card">
             <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="اختبار">
             <h2>اختبار حفظي</h2>
-            <p>اختبر قدراتك واسترجع معلوماتك من خلال اختبارات حفظ ممتعة ومتنوعة.</p>
             <a href="quiz.html" class="btn">ابدأ الاختبار</a>
         </div>
     </div>
 
     <footer>
         <p>© 2026 مستر باي - جميع الحقوق محفوظة</p>
-        <p style="font-size: 0.8rem; margin-top: 5px;">Privacy Policy | Terms of Use</p>
     </footer>
 
 </body>
