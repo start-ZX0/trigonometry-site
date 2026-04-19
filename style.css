@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    text-align: center;
+}
+
+/* الهيدر */
+.header {
+    background-color: #0a1f44;
+    color: white;
+    padding: 30px;
+}
+
+/* المحتوى */
+.content {
+    background-color: white;
+    color: black;
+    padding: 40px;
+}
+
+/* الأزرار */
+button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* الفوتر */
+.footer {
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+
+/* الصفحات الثانوية */
+.blue-page {
+    background-color: blue;
+    color: white;
+    height: 100vh;
+    padding-top: 50px;
+}
