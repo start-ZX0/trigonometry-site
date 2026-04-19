@@ -15,9 +15,15 @@
     <div class="breadcrumb">الرئيسية > الدوال المثلثية > تعلم من الصفر</div>
 
     <main class="main-container">
-        <section class="visualizer-box">
+        
+        <div class="nav-control-bar">
+            <a href="index.html" class="back-link">العودة للرئيسية</a>
+        </div>
+
+        <section class="visualizer-container blue-visual">
             <h2 id="angleDisplay">الزاوية المختارة: 0°</h2>
-            <div class="flex-layout">
+            
+            <div class="visual-layout">
                 <div class="coordinate-system">
                     <div class="grid-lines"></div>
                     <div class="axis x-axis"></div>
@@ -38,7 +44,7 @@
 
             <div class="slider-wrapper">
                 <input type="range" id="angleSlider" min="0" max="7" value="0">
-                <div class="slider-marks">
+                <div class="slider-ticks">
                     <span>0°</span><span>30°</span><span>45°</span><span>60°</span><span>90°</span><span>180°</span><span>270°</span><span>360°</span>
                 </div>
             </div>
@@ -66,25 +72,54 @@
         <section class="laws-section">
             <h3>قوانين النسب المثلثية الأساسية والمقلوبات</h3>
             <div class="laws-grid">
-                <div class="law-card blue"><h4>sin θ</h4><p>المقابل / الوتر</p></div>
-                <div class="law-card orange"><h4>cos θ</h4><p>المجاور / الوتر</p></div>
-                <div class="law-card purple"><h4>tan θ</h4><p>المقابل / المجاور</p></div>
-                <div class="law-card red"><h4>sec θ</h4><p>1 / cos θ</p></div>
-                <div class="law-card green"><h4>csc θ</h4><p>1 / sin θ</p></div>
-                <div class="law-card teal"><h4>cot θ</h4><p>1 / tan θ</p></div>
+                <div class="law-card blue">
+                    <h4>sin θ</h4>
+                    <p>المقابل / الوتر</p>
+                    <small>المتطابقة: csc θ = 1 / sin θ</small>
+                </div>
+                <div class="law-card orange">
+                    <h4>cos θ</h4>
+                    <p>المجاور / الوتر</p>
+                    <small>المتطابقة: sec θ = 1 / cos θ</small>
+                </div>
+                <div class="law-card purple">
+                    <h4>tan θ</h4>
+                    <p>المقابل / المجاور</p>
+                    <small>القانون: tan θ = sin θ / cos θ</small>
+                </div>
+                <div class="law-card red">
+                    <h4>csc θ</h4>
+                    <p>1 / sin θ</p>
+                    <small>المقلوب: الوتر / المقابل</small>
+                </div>
+                <div class="law-card green">
+                    <h4>sec θ</h4>
+                    <p>1 / cos θ</p>
+                    <small>المقلوب: الوتر / المجاور</small>
+                </div>
+                <div class="law-card teal">
+                    <h4>cot θ</h4>
+                    <p>1 / tan θ</p>
+                    <small>القانون: cot θ = cos θ / sin θ</small>
+                </div>
+            </div>
+            <div class="core-identity-card">
+                <h4>المتطابقة الرئيسية (قانون فيثاغورس):</h4>
+                <p>sin² θ + cos² θ = 1</p>
             </div>
         </section>
-
+        
         <section class="pro-tip-section">
             <div class="tip-card">
                 <div class="tip-icon">💡</div>
                 <div class="tip-content">
                     <h4>ملاحظة للحفظ السريع:</h4>
-                    <p>للحفظ بشكل أسرع اكتب الجدول والقوانين مرتان ثم اختبر نفسك في قسم اختبر حفظي.</p>
+                    <p>للحفظ بشكل أسرع، اكتب الجدول والقوانين مرتين يدوياً، ثم اختبر قوتك الآن في قسم اختبر حفظي.</p>
                 </div>
                 <a href="test.html" class="go-test-btn">انتقل للاختبار</a>
             </div>
         </section>
+
     </main>
 
     <footer><p>© 2026 مستر باي - جميع الحقوق محفوظة</p></footer>
