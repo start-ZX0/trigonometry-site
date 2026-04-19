@@ -4,28 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MRπ - تعلم من الصفر</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* إعدادات الألوان والتنسيق العام */
+        :root {
+            --blue-dark: #0d47a1;
+            --blue-main: #1976d2;
+            --blue-light: #f0f7ff;
+            --white: #ffffff;
+        }
+
+        /* إصلاح جذري للتنظيم والاستجابة لجميع الشاشات */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            font-family: sans-serif;
+            background: #f5f7fa;
+            direction: rtl;
+            min-height: 100vh;
+        }
+
+        header { 
+            background-color: var(--blue-dark); 
+            color: white; 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        nav a { color: white; text-decoration: none; font-weight: bold; }
+
+        .breadcrumb { padding: 10px 5%; background: #d1e3f8; color: var(--blue-dark); font-size: 0.85rem; }
+
+        .main-container { max-width: 1100px; margin: 20px auto; padding: 0 15px; width: 100%; }
+
+        /* منطقة المحاكي الإحداثي */
+        .visualizer-container { 
+            background: var(--white); 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+
+        .visual-layout { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 30px; 
+            align-items: center; 
+            margin-top: 20px; 
+        }
+
+        /* المستوى الإحداثي المصحح */
+        .coordinate-system { 
+            width: 280px; 
+            height: 280px; 
+            max-width: 100%; 
+            background: var(--white); 
+            border: 2px solid #333; 
+            border-radius: 50%; 
+            position: relative; 
+            margin: 20px auto; 
+        }
+
+        .axis { position: absolute; background: #000; z-index: 5; }
+        .x-axis { width: 100%; height: 2px; top: 50%; left: 0; }
+        .y-axis { width: 2px; height: 100%; left: 50%; top: 0; }
+
+        /* السهم - يبدأ من 0 درجة (اليمين) */
+        .vector { 
+            width: 50%; 
+            height: 4px; 
+            background: #d32f2f; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform-origin: left center; 
+            z-index: 10; 
+            transform: rotate(0deg); /* البداية من 0 */
+            transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
+        }
+
+        .label { position: absolute; font-weight: bold; color: var(--blue-dark); font-size: 13px; }
+        .p0 { right: -30px; top: 46%; } 
+        .p90 { top: -25px; left: 45%; } 
+        .p180 { left: -35px; top: 46%; } 
+        .p270 { bottom: -25px; left: 43%; }
+
+        /* قيم الدوال الجانبية */
+        .values-sidebar { display: flex; flex-direction: column; gap: 10px; min-width: 120px; }
+        .v-card { background: var(--white); padding: 12px; border-radius: 10px; border-right: 5px solid var(--blue-main); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+        /* حل تداخل المؤشر (Slider) */
+        .slider-wrapper { width: 100%; max-width: 500px; margin: 30px auto 10px; padding: 0 10px; }
+        input[type=range] { width: 100%; cursor: pointer; accent-color: var(--blue-main); }
+        .slider-ticks { display: flex; justify-content: space-between; margin-top: 8px; direction: ltr; }
+        .slider-ticks span { width: 30px; text-align: center; font-size: 11px; font-weight: bold; color: var(--blue-dark); }
+
+        /* الجدول المستجيب للموبايل */
+        .table-container { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
+        .trig-table { min-width: 500px; width: 100%; border-collapse: collapse; text-align: center; }
+        .trig-table th { background: var(--blue-dark); color: white; padding: 12px; }
+        .trig-table td { padding: 10px; border: 1px solid #eee; font-weight: bold; }
+
+        /* شبكة القوانين */
+        .laws-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
+        .law-card { padding: 15px; border-radius: 10px; text-align: center; color: white; }
+        .law-card h4 { font-size: 1.2rem; margin-bottom: 5px; }
+        .law-card small { font-size: 0.8rem; opacity: 0.9; }
+
+        /* ألوان البطاقات */
+        .blue { background: #1976d2; } .orange { background: #f57c00; } .purple { background: #7b1fa2; }
+        .red { background: #d32f2f; } .green { background: #388e3c; } .teal { background: #00796b; }
+
+        .back-link { background: var(--blue-dark); color: white; padding: 8px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 15px; }
+
+        footer { text-align: center; padding: 20px; background: #e3f2fd; color: var(--blue-dark); margin-top: 40px; }
+
+        /* تعديلات الموبايل */
+        @media (max-width: 768px) {
+            .visual-layout { flex-direction: column; }
+            .values-sidebar { flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%; }
+            .v-card { flex: 1 1 80px; font-size: 0.85rem; }
+            .coordinate-system { width: 230px; height: 230px; }
+            .laws-grid { grid-template-columns: repeat(2, 1fr); }
+            .slider-ticks span { font-size: 9px; width: 20px; }
+        }
+    </style>
 </head>
-<body class="learn-page">
+<body>
+
     <header>
         <div class="logo">MRπ</div>
-        <nav><a href="index.html">الصفحة الرئيسية</a></nav>
+        <nav><a href="index.html">الرئيسية</a></nav>
     </header>
 
-    <div class="breadcrumb">الرئيسية > الدوال المثلثية > تعلم من الصفر</div>
+    <div class="breadcrumb">الرئيسية > تعلم من الصفر</div>
 
     <main class="main-container">
-        
-        <div class="nav-control-bar">
-            <a href="index.html" class="back-link">العودة للرئيسية</a>
-        </div>
+        <a href="index.html" class="back-link">العودة للرئيسية</a>
 
-        <section class="visualizer-container blue-visual">
+        <section class="visualizer-container">
             <h2 id="angleDisplay">الزاوية المختارة: 0°</h2>
             
             <div class="visual-layout">
                 <div class="coordinate-system">
-                    <div class="grid-lines"></div>
                     <div class="axis x-axis"></div>
                     <div class="axis y-axis"></div>
                     <div id="vector" class="vector"></div>
@@ -36,9 +164,9 @@
                 </div>
 
                 <div class="values-sidebar">
-                    <div class="v-card sin"><strong>sin:</strong> <span id="sinVal">0</span></div>
-                    <div class="v-card cos"><strong>cos:</strong> <span id="cosVal">1</span></div>
-                    <div class="v-card tan"><strong>tan:</strong> <span id="tanVal">0</span></div>
+                    <div class="v-card"><strong>sin:</strong> <span id="sinVal">0</span></div>
+                    <div class="v-card"><strong>cos:</strong> <span id="cosVal">1</span></div>
+                    <div class="v-card"><strong>tan:</strong> <span id="tanVal">0</span></div>
                 </div>
             </div>
 
@@ -51,78 +179,66 @@
         </section>
 
         <section class="table-container">
-            <h3>جدول النسب المثلثية للزوايا الخاصة</h3>
+            <h3>جدول النسب المثلثية (خامس علمي)</h3>
             <div class="table-responsive">
                 <table class="trig-table">
                     <thead>
                         <tr>
-                            <th>الزاوية</th>
-                            <th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th><th>180°</th><th>270°</th><th>360°</th>
+                            <th>الزاوية</th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th><th>180°</th><th>270°</th><th>360°</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="row-sin"><td>sin θ</td><td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td><td>0</td><td>-1</td><td>0</td></tr>
-                        <tr class="row-cos"><td>cos θ</td><td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td><td>-1</td><td>0</td><td>1</td></tr>
-                        <tr class="row-tan"><td>tan θ</td><td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>غير معرف</td><td>0</td><td>غير معرف</td><td>0</td></tr>
+                        <tr style="background:#e8f5e9"><td>sin</td><td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td><td>0</td><td>-1</td><td>0</td></tr>
+                        <tr style="background:#fff3e0"><td>cos</td><td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td><td>-1</td><td>0</td><td>1</td></tr>
+                        <tr style="background:#f3e5f5"><td>tan</td><td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>غير معرف</td><td>0</td><td>غير معرف</td><td>0</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
         <section class="laws-section">
-            <h3>قوانين النسب المثلثية الأساسية والمقلوبات</h3>
+            <h3>قوانين الدوال المثلثية</h3>
             <div class="laws-grid">
-                <div class="law-card blue">
-                    <h4>sin θ</h4>
-                    <p>المقابل / الوتر</p>
-                    <small>المتطابقة: csc θ = 1 / sin θ</small>
-                </div>
-                <div class="law-card orange">
-                    <h4>cos θ</h4>
-                    <p>المجاور / الوتر</p>
-                    <small>المتطابقة: sec θ = 1 / cos θ</small>
-                </div>
-                <div class="law-card purple">
-                    <h4>tan θ</h4>
-                    <p>المقابل / المجاور</p>
-                    <small>القانون: tan θ = sin θ / cos θ</small>
-                </div>
-                <div class="law-card red">
-                    <h4>csc θ</h4>
-                    <p>1 / sin θ</p>
-                    <small>المقلوب: الوتر / المقابل</small>
-                </div>
-                <div class="law-card green">
-                    <h4>sec θ</h4>
-                    <p>1 / cos θ</p>
-                    <small>المقلوب: الوتر / المجاور</small>
-                </div>
-                <div class="law-card teal">
-                    <h4>cot θ</h4>
-                    <p>1 / tan θ</p>
-                    <small>القانون: cot θ = cos θ / sin θ</small>
-                </div>
-            </div>
-            <div class="core-identity-card">
-                <h4>المتطابقة الرئيسية (قانون فيثاغورس):</h4>
-                <p>sin² θ + cos² θ = 1</p>
+                <div class="law-card blue"><h4>sin θ</h4><p>المقابل/الوتر</p><small>csc = 1/sin</small></div>
+                <div class="law-card orange"><h4>cos θ</h4><p>المجاور/الوتر</p><small>sec = 1/cos</small></div>
+                <div class="law-card purple"><h4>tan θ</h4><p>sin/cos</p><small>cot = 1/tan</small></div>
+                <div class="law-card red"><h4>csc θ</h4><p>قاطع تمام</p><small>1/sin</small></div>
+                <div class="law-card green"><h4>sec θ</h4><p>قاطع</p><small>1/cos</small></div>
+                <div class="law-card teal"><h4>cot θ</h4><p>ظل تمام</p><small>cos/sin</small></div>
             </div>
         </section>
-        
-        <section class="pro-tip-section">
-            <div class="tip-card">
-                <div class="tip-icon">💡</div>
-                <div class="tip-content">
-                    <h4>ملاحظة للحفظ السريع:</h4>
-                    <p>للحفظ بشكل أسرع، اكتب الجدول والقوانين مرتين يدوياً، ثم اختبر قوتك الآن في قسم اختبر حفظي.</p>
-                </div>
-                <a href="test.html" class="go-test-btn">انتقل للاختبار</a>
-            </div>
-        </section>
-
     </main>
 
-    <footer><p>© 2026 مستر باي - جميع الحقوق محفوظة</p></footer>
-    <script src="script.js"></script>
+    <footer><p>© 2026 MRπ - جميع الحقوق محفوظة</p></footer>
+
+    <script>
+        const slider = document.getElementById('angleSlider');
+        const vector = document.getElementById('vector');
+        const angleDisplay = document.getElementById('angleDisplay');
+        const sinVal = document.getElementById('sinVal');
+        const cosVal = document.getElementById('cosVal');
+        const tanVal = document.getElementById('tanVal');
+
+        const data = [
+            { d: 0, s: "0", c: "1", t: "0" },
+            { d: 30, s: "1/2", c: "√3/2", t: "√3/3" },
+            { d: 45, s: "√2/2", c: "√2/2", t: "1" },
+            { d: 60, s: "√3/2", c: "1/2", t: "√3" },
+            { d: 90, s: "1", c: "0", t: "∞" },
+            { d: 180, s: "0", c: "-1", t: "0" },
+            { d: 270, s: "-1", c: "0", t: "∞" },
+            { d: 360, s: "0", c: "1", t: "0" }
+        ];
+
+        slider.addEventListener('input', () => {
+            const v = data[slider.value];
+            angleDisplay.innerText = `الزاوية المختارة: ${v.d}°`;
+            // تدوير عكس عقارب الساعة (الاتجاه الرياضي)
+            vector.style.transform = `rotate(${-v.d}deg)`;
+            sinVal.innerText = v.s;
+            cosVal.innerText = v.c;
+            tanVal.innerText = v.t;
+        });
+    </script>
 </body>
 </html>
