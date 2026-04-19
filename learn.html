@@ -1,20 +1,71 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta charset="UTF-8">
-    <title>التعلم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRπ - تعلم من الصفر</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-<body class="blue-page">
+<body class="learn-page">
 
-<h1>شرح sin cos tan (قابل للتعديل)</h1>
+    <header class="main-header">
+        <div class="logo">MRπ</div>
+        <nav>
+            <a href="index.html">الصفحة الرئيسية</a>
+        </nav>
+    </header>
 
-<p>محتوى الشرح هنا (قابل للتعديل)</p>
+    <div class="breadcrumb">
+        <span>الرئيسية > الدوال > تعلم من الصفر</span>
+    </div>
 
-<button onclick="goHome()">رجوع (قابل للتعديل)</button>
+    <main class="content-wrapper">
+        <section class="visualizer-container">
+            <h3>حرك المؤشر لتغيير الزاوية:</h3>
+            
+            <div class="graph-box">
+                <div id="angle-display">Angle: 0° / 0 rad</div>
+                <div class="coordinate-system">
+                    <canvas id="trigCanvas"></canvas>
+                </div>
+            </div>
 
-<script src="script.js"></script>
+            <div class="controls">
+                <input type="range" id="angleSlider" min="0" max="360" value="0">
+                <div class="slider-labels">
+                    <span>0</span>
+                    <span>90°</span>
+                    <span>180°</span>
+                    <span>270°</span>
+                    <span>360°</span>
+                </div>
+            </div>
+        </section>
+
+        <aside class="notes-sidebar">
+            <h2>ملاحظات هامة</h2>
+            
+            <div class="note-card">
+                <div class="note-icon">📐</div>
+                <p>1. الملاحظة: **π (باي)** تساوي 180 درجة.</p>
+            </div>
+
+            <div class="note-card">
+                <div class="note-icon">∟</div>
+                <p>2. الملاحظة: الزاوية القائمة هي 90 درجة.</p>
+            </div>
+
+            <div class="note-card">
+                <div class="note-icon">🔵</div>
+                <p>3. الدورة الكاملة هي 360 درجة (2π راديان).</p>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2026 مستر باي - جميع الحقوق محفوظة</p>
+    </footer>
+
 </body>
 </html>
