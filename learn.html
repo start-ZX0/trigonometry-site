@@ -11,46 +11,103 @@
         <div class="logo">MRπ</div>
         <nav><a href="index.html">الصفحة الرئيسية</a></nav>
     </header>
-    
+
     <div class="breadcrumb">الرئيسية > الدوال المثلثية > تعلم من الصفر</div>
-    
-    <main class="content-wrapper">
-        <section class="visualizer-container green-theme">
-            <h3>استخدم المؤشر لاختيار زاوية خاصة: <span id="angleDisplay">0° / 0π</span></h3>
-            
-            <div class="graph-box">
-                <div class="coordinate-system">
-                    <div class="axis x-axis"></div>
-                    <div class="axis y-axis"></div>
+
+    <main class="main-container">
+        <div class="top-section">
+            <aside class="notes-sidebar">
+                <h3>ملاحظات هامة</h3>
+                <div id="dynamicNote" class="note-card">
+                    <p>حرك المؤشر لاستكشاف الزوايا الشهيرة.</p>
+                </div>
+            </aside>
+
+            <section class="visualizer">
+                <h2 id="angleDisplay">الزاوية: 0°</h2>
+                <div class="graph-wrapper">
+                    <div class="grid-background"></div>
+                    <div class="axis x-axis"><span>X</span></div>
+                    <div class="axis y-axis"><span>Y</span></div>
                     <div id="vector" class="vector"></div>
+                    <div class="axis-label p0">0°</div>
+                    <div class="axis-label p90">90°</div>
+                    <div class="axis-label p180">180°</div>
+                    <div class="axis-label p270">270°</div>
                 </div>
-            </div>
-
-            <div class="slider-wrapper">
-                <input type="range" id="angleSlider" min="0" max="6" value="0">
-                <div class="slider-labels">
-                    <span>0</span>
-                    <span>π/6</span>
-                    <span>π/4</span>
-                    <span>π/3</span>
-                    <span>π/2</span>
-                    <span>π</span>
-                    <span>3π/2</span>
-                    <span>2π</span>
+                <div class="slider-container">
+                    <input type="range" id="angleSlider" min="0" max="7" value="0">
+                    <div class="slider-ticks">
+                        <span>0°</span><span>30°</span><span>45°</span><span>60°</span><span>90°</span><span>180°</span><span>270°</span><span>360°</span>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <aside class="notes-sidebar">
-            <h2>ملاحظات هامة</h2>
-            <div id="dynamicNote" class="note-card info-card">
-                <p>اختر زاوية حادة أو قائمة من المؤشر لرؤية خصائصها وقيم الدوال المثلثية لها.</p>
+            <div class="trig-display">
+                <div class="val-box"><strong>sin</strong> <span id="sinVal">0</span></div>
+                <div class="val-box"><strong>cos</strong> <span id="cosVal">1</span></div>
+                <div class="val-box"><strong>tan</strong> <span id="tanVal">0</span></div>
             </div>
-        </aside>
+        </div>
+
+        <div class="table-section">
+            <h3>جدول قيم النسب المثلثية للزوايا الخاصة</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الزاوية (°)</th>
+                            <th>0°</th>
+                            <th>30°</th>
+                            <th>45°</th>
+                            <th>60°</th>
+                            <th>90°</th>
+                            <th>180°</th>
+                            <th>270°</th>
+                            <th>360°</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>sin θ</td>
+                            <td>0</td>
+                            <td>1/2</td>
+                            <td>√2/2</td>
+                            <td>√3/2</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>cos θ</td>
+                            <td>1</td>
+                            <td>√3/2</td>
+                            <td>√2/2</td>
+                            <td>1/2</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>tan θ</td>
+                            <td>0</td>
+                            <td>√3/3</td>
+                            <td>1</td>
+                            <td>√3</td>
+                            <td>غير معرف</td>
+                            <td>0</td>
+                            <td>غير معرف</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
-    
+
     <footer><p>© 2026 مستر باي - جميع الحقوق محفوظة</p></footer>
-    
     <script src="script.js"></script>
 </body>
 </html>
