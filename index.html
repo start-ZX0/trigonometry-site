@@ -3,158 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MR.π - عالم الدوال المثلثية</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f7ff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #0d47a1;
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 2px solid white;
-            padding-bottom: 5px;
-        }
-
-        .hero-section {
-            background-color: #1976d2;
-            color: white;
-            text-align: center;
-            padding: 80px 20px 150px 20px;
-        }
-
-        /* تنسيق النصوص الثلاثة */
-        .hero-section .welcome-text {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            display: block;
-            opacity: 0.9;
-        }
-
-        .hero-section h1 {
-            font-size: 3rem;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-
-        .hero-section .slogan {
-            font-size: 1.3rem;
-            margin-top: 10px;
-            opacity: 0.8;
-        }
-
-        .cards-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: -100px;
-            padding: 0 20px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 350px;
-            padding: 40px 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-        }
-
-        .card h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background-color: #1565c0;
-            color: white;
-            padding: 12px 35px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 30px 20px;
-            color: #555;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
-            .cards-container { margin-top: -60px; }
-        }
-    </style>
+    <title>MRπ - تعلم من الصفر</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
+<body class="learn-page">
     <header>
         <div class="logo">MRπ</div>
-        <nav>
-            <a href="#">الصفحة الرئيسية</a>
-        </nav>
+        <nav><a href="index.html">الصفحة الرئيسية</a></nav>
     </header>
+    
+    <div class="breadcrumb">الرئيسية > الدوال المثلثية > تعلم من الصفر</div>
+    
+    <main class="content-wrapper">
+        <section class="visualizer-container">
+            <h3>الزاوية المختارة: <span id="angleDisplay">0°</span></h3>
+            
+            <div class="flex-layout">
+                <div class="graph-box">
+                    <div class="coordinate-system">
+                        <div class="axis x-axis"></div>
+                        <div class="axis y-axis"></div>
+                        <div id="vector" class="vector"></div>
+                    </div>
+                </div>
 
-    <div class="hero-section">
-        <span class="welcome-text">مرحبا بكم</span>
-        <h1>عالم الدوال المثلثية</h1>
-        <p class="slogan">يد بيد نحو الأفضل</p>
-    </div>
+                <div class="trig-values">
+                    <div class="val-item"><strong>sin x:</strong> <span id="sinVal">0</span></div>
+                    <div class="val-item"><strong>cos x:</strong> <span id="cosVal">1</span></div>
+                    <div class="val-item"><strong>tan x:</strong> <span id="tanVal">0</span></div>
+                </div>
+            </div>
 
-    <div class="cards-container">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/2436/2436636.png" alt="تعلم">
-            <h2>تعلم من الصفر</h2>
-            <a href="learn.html" class="btn">ابدأ رحلتك</a>
-        </div>
+            <div class="slider-wrapper">
+                <input type="range" id="angleSlider" min="0" max="7" value="0">
+                <div class="slider-labels">
+                    <span>0°</span><span>30°</span><span>45°</span><span>60°</span><span>90°</span><span>180°</span><span>270°</span><span>360°</span>
+                </div>
+            </div>
+        </section>
 
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="اختبار">
-            <h2>اختبار حفظي</h2>
-            <a href="quiz.html" class="btn">ابدأ الاختبار</a>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2026 مستر باي - جميع الحقوق محفوظة</p>
-    </footer>
-
+        <aside class="notes-sidebar">
+            <h2>ملاحظات هامة</h2>
+            <div id="dynamicNote" class="note-card info-card">
+                <p>حرك المؤشر لاستكشاف الزوايا الشهيرة وقيم دوالها.</p>
+            </div>
+        </aside>
+    </main>
+    
+    <footer><p>© 2026 مستر باي - جميع الحقوق محفوظة</p></footer>
+    <script src="script.js"></script>
 </body>
 </html>
