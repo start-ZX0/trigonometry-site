@@ -3,93 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRπ - محادثة مع أستاذ أيمن</title>
+    <title>محادثة الأستاذ أيمن - MRπ</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; display: flex; flex-direction: column; height: 100vh; }
-        header { background-color: #0d47a1; color: white; padding: 15px; text-align: center; font-size: 1.2rem; font-weight: bold; position: relative; }
-        .back-btn { position: absolute; right: 15px; top: 15px; color: white; text-decoration: none; font-size: 0.9rem; border: 1px solid white; padding: 2px 10px; border-radius: 5px; }
-        #chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-        .msg { max-width: 80%; padding: 12px 18px; border-radius: 15px; line-height: 1.4; font-size: 1rem; position: relative; }
-        .user-msg { align-self: flex-start; background-color: #e3f2fd; color: #0d47a1; border-bottom-right-radius: 2px; }
-        .bot-msg { align-self: flex-end; background-color: white; color: #333; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .input-area { background: white; padding: 15px; display: flex; gap: 10px; border-top: 1px solid #ddd; }
-        input { flex: 1; border: 1px solid #ccc; padding: 12px; border-radius: 25px; outline: none; font-size: 1rem; }
-        button { background: #0d47a1; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #1565c0; }
-        .typing { font-style: italic; color: #777; font-size: 0.8rem; margin-bottom: 10px; display: none; }
+        /* تنسيقات بسيطة وسريعة للموبايل */
+        body { font-family: sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
+        #chat-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #messages { height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column; }
+        .message { margin: 5px 0; padding: 8px 12px; border-radius: 15px; max-width: 80%; }
+        .user-msg { background: #007bff; color: white; align-self: flex-start; }
+        .ai-msg { background: #e9ecef; color: #333; align-self: flex-end; }
+        #input-area { display: flex; gap: 10px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<header>
-    أستاذ أيمن - المساعد الذكي
-    <a href="index.html" class="back-btn">رجوع</a>
-</header>
-
 <div id="chat-container">
-    <div class="msg bot-msg">أهلاً بك! أنا أستاذ أيمن، كيف يمكنني مساعدتك في عالم الدوال المثلثية اليوم؟</div>
+    <h2>مساعدة الأستاذ أيمن 🎓</h2>
+    <div id="messages"></div>
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="اسأل عن المثلثات أو الدوال...">
+        <button onclick="sendMessage()">إرسال</button>
+    </div>
 </div>
 
-<div id="typing-indicator" class="typing" style="padding: 0 20px;">أستاذ أيمن يفكر الآن...</div>
+<script type="module">
+    import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-<div class="input-area">
-    <input type="text" id="user-input" placeholder="اكتب سؤالك هنا (عربي، English، أو عامي)..." onkeypress="handleKey(event)">
-    <button onclick="sendMessage()">إرسال</button>
-</div>
-
-<script>
-    // مفتاح الـ API الخاص بك
-    const API_KEY = "AIzaSyAs_27yeYlVQPGcNUHDc5xbUlje3M2Ocq8"; 
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
-    const chatContainer = document.getElementById('chat-container');
-    const userInput = document.getElementById('user-input');
-    const typingIndicator = document.getElementById('typing-indicator');
-
-    // تعليمات الشخصية (System Prompt) لجعله مرناً
-    const promptInstructions = "أنت أستاذ رياضيات خبير اسمه (أستاذ أيمن). وظيفتك مساعدة الطلاب في موقع 'MRπ' لتعلم الدوال المثلثية. كن ودوداً جداً ومرناً. إذا تحدث الطالب بلهجة عامية، أجب بأسلوب قريب منه ومحبب. إذا سأل بالإنجليزية، أجب بالإنجليزية. بسط القوانين الصعبة واستخدم أمثلة من الواقع.";
+    // المفتاح الجديد الخاص بك
+    const API_KEY = "AIzaSyDXx8_64GLSRAX1J6FZ7wIa4_gr-ojQ-vk"; 
+    const genAI = new GoogleGenerativeAI(API_KEY);
 
     async function sendMessage() {
-        const text = userInput.value.trim();
-        if (!text) return;
+        const inputField = document.getElementById('user-input');
+        const messageText = inputField.value.trim();
+        if (!messageText) return;
 
-        addMessage(text, 'user-msg');
-        userInput.value = "";
-        typingIndicator.style.display = "block";
+        displayMessage(messageText, 'user-msg');
+        inputField.value = '';
 
         try {
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: `${promptInstructions}\n\nسؤال المستخدم: ${text}` }]
-                    }]
-                })
-            });
-
-            const data = await response.json();
-            const botReply = data.candidates[0].content.parts[0].text;
-
-            typingIndicator.style.display = "none";
-            addMessage(botReply, 'bot-msg');
+            // استخدام موديل Gemini 1.5 Flash للسرعة
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            
+            // تعريف شخصية الأستاذ أيمن
+            const prompt = `أنت "الأستاذ أيمن"، خبير في الرياضيات والمثلثات لموقع MRπ. أجب على هذا السؤال بأسلوب تعليمي مبسط: ${messageText}`;
+            
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            displayMessage(response.text(), 'ai-msg');
         } catch (error) {
-            typingIndicator.style.display = "none";
-            addMessage("عذراً، حدث خطأ في الاتصال. حاول مرة أخرى.", 'bot-msg');
+            displayMessage("عذراً، حدث خطأ في الاتصال. تأكد من تفعيل API.", 'ai-msg');
+            console.error(error);
         }
     }
 
-    function addMessage(text, className) {
-        const div = document.createElement('div');
-        div.className = `msg ${className}`;
-        div.innerText = text;
-        chatContainer.appendChild(div);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+    function displayMessage(text, className) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${className}`;
+        msgDiv.innerText = text;
+        document.getElementById('messages').appendChild(msgDiv);
+        document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
     }
 
-    function handleKey(e) {
-        if (e.key === 'Enter') sendMessage();
-    }
+    window.sendMessage = sendMessage;
 </script>
 
 </body>
