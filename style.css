@@ -35,7 +35,44 @@ header {
 }
 
 /* =========================
-   الحاوية
+   الصفحة الرئيسية
+========================= */
+.hero-section {
+    background: var(--blue-main);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: var(--blue-dark);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+/* =========================
+   learn - المحاكي
 ========================= */
 .main-container {
     max-width: 1100px;
@@ -43,18 +80,16 @@ header {
     padding: 0 15px;
 }
 
-/* =========================
-   المحاكي
-========================= */
 .visualizer-container {
     background: white;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: center;
 }
 
-/* الدائرة */
+/* =========================
+   الدائرة (إصلاح الزوايا)
+========================= */
 .coordinate-system {
     width: min(280px, 90vw);
     height: min(280px, 90vw);
@@ -64,6 +99,7 @@ header {
     margin: 30px auto;
 }
 
+/* الخطوط */
 .axis {
     position: absolute;
     background: black;
@@ -81,10 +117,11 @@ header {
     left: 50%;
 }
 
+/* المتجه */
 .vector {
     width: 50%;
     height: 4px;
-    background: #d32f2f;
+    background: red;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -92,50 +129,81 @@ header {
 }
 
 /* =========================
-   جدول القيم (إصلاح نهائي للألوان)
+   إصلاح الزوايا (مهم جدًا)
 ========================= */
-.table-wrapper {
+.label {
+    position: absolute;
+    font-weight: bold;
+    font-size: 14px;
     background: white;
-    padding: 15px;
-    border-radius: 10px;
-    overflow-x: auto;
-    margin-top: 20px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: var(--blue-dark);
+    z-index: 10;
 }
 
+/* الحل الصحيح للزوايا */
+.p0 {
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.p90 {
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.p180 {
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.p270 {
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* =========================
+   الجدول (ألوان صحيحة)
+========================= */
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px;
+    text-align: center;
+    min-width: 500px;
 }
 
 th {
     background: var(--blue-dark);
     color: white;
-    padding: 12px;
+    padding: 10px;
 }
 
 td {
-    text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
 }
 
 /* sin */
-tr.sin-row td {
+.sin-row td {
     background: #e8f5e9;
     color: #1b5e20;
     font-weight: bold;
 }
 
 /* cos */
-tr.cos-row td {
+.cos-row td {
     background: #fff3e0;
     color: #e65100;
     font-weight: bold;
 }
 
 /* tan */
-tr.tan-row td {
+.tan-row td {
     background: #f3e5f5;
     color: #6a1b9a;
     font-weight: bold;
@@ -146,7 +214,7 @@ tr.tan-row td {
 ========================= */
 .laws-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 15px;
     margin-top: 20px;
 }
@@ -156,19 +224,17 @@ tr.tan-row td {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    font-weight: bold;
 }
-
-/* ألوان */
-.blue { border-right: 5px solid #1976d2; }
-.orange { border-right: 5px solid #f57c00; }
-.purple { border-right: 5px solid #8e24aa; }
 
 /* =========================
    موبايل
 ========================= */
 @media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
     table {
-        min-width: 500px;
+        min-width: 450px;
     }
 }
