@@ -1,28 +1,24 @@
 const slider = document.getElementById('angleSlider');
 const vector = document.getElementById('vector');
-const angleDisplay = document.getElementById('angleDisplay');
-const sinVal = document.getElementById('sinVal');
-const cosVal = document.getElementById('cosVal');
-const tanVal = document.getElementById('tanVal');
+const angleText = document.getElementById('angleText');
+const radText = document.getElementById('radText');
 
-// تم ترتيب البيانات بدقة لتلافي الخلط بين 0 و 360
-const data = [
-    { d: 0, s: "0", c: "1", t: "0" },          // الموضع 0
-    { d: 30, s: "1/2", c: "√3/2", t: "√3/3" },
-    { d: 45, s: "√2/2", c: "√2/2", t: "1" },
-    { d: 60, s: "√3/2", c: "1/2", t: "√3" },
-    { d: 90, s: "1", c: "0", t: "غير معرف" },
-    { d: 180, s: "0", c: "-1", t: "0" },
-    { d: 270, s: "-1", c: "0", t: "غير معرف" },
-    { d: 360, s: "0", c: "1", t: "0" }         // الموضع 7
+// الزوايا المطلوبة فقط
+const angles = [
+    { deg: 0, rad: "0" },
+    { deg: 30, rad: "π/6" },
+    { deg: 45, rad: "π/4" },
+    { deg: 60, rad: "π/3" },
+    { deg: 90, rad: "π/2" },
+    { deg: 180, rad: "π" },
+    { deg: 270, rad: "3π/2" }
 ];
 
 slider.addEventListener('input', () => {
-    const v = data[slider.value];
-    angleDisplay.innerText = `الزاوية المختارة: ${v.d}°`;
-    // تدوير السهم (نضرب في -1 ليكون الدوران عكس عقارب الساعة رياضياً)
-    vector.style.transform = `rotate(${-v.d}deg)`;
-    sinVal.innerText = v.s;
-    cosVal.innerText = v.c;
-    tanVal.innerText = v.t;
+    const selected = angles[slider.value];
+    angleText.innerText = `الزاوية: ${selected.deg}°`;
+    radText.innerText = `rad: ${selected.rad}`;
+    
+    // تدوير السهم (نستخدم القيمة السالبة للدوران عكس عقارب الساعة)
+    vector.style.transform = `rotate(${-selected.deg}deg)`;
 });
