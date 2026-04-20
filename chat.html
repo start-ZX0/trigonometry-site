@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRπ - أستاذ أيمن</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">MRπ</div>
+        <nav>
+            <a href="test.html">اختبار</a>
+            <a href="learn.html">التعلم</a>
+            <a href="index.html">الرئيسية</a>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="card chat-card">
+            <h2 style="text-align: center; color: var(--blue-dark); border-bottom: 2px solid #eee; padding-bottom: 10px;">👨‍🏫 أستاذ أيمن</h2>
+            
+            <div class="chat-box" id="chat-box">
+                <div class="message ai-msg">أهلاً بك يا بطل! أنا أستاذ أيمن. يمكنك سؤالي عن قيمة أي زاوية (مثال: كم sin 30) أو عن القوانين.</div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." onkeypress="handleEnter(event)">
+                <button class="btn" onclick="sendMessage()">إرسال</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+
+        // قاموس إجابات أستاذ أيمن (الذكاء الاصطناعي البسيط)
+        const botKnowledge = {
+            "sin 0": "قيمة sin(0°) هي 0",
+            "sin 30": "قيمة sin(30°) هي 1/2",
+            "sin 45": "قيمة sin(45°) هي √2/2",
+            "sin 60": "قيمة sin(60°) هي √3/2",
+            "sin 90": "قيمة sin(90°) هي 1",
+            "cos 0": "قيمة cos(0°) هي 1",
+            "cos 30": "قيمة cos(30°) هي √3/2",
+            "cos 45": "قيمة cos(45°) هي √2/2",
+            "cos 60": "قيمة cos(60°) هي 1/2",
+            "cos 90": "قيمة cos(90°) هي 0",
+            "tan": "قانون التان هو: tan = sin / cos",
+            "csc": "قانون القاطع التمام هو: csc = 1 / sin",
+            "sec": "قانون القاطع هو: sec = 1 / cos",
+            "cot": "قانون ظل التمام هو: cot = 1 / tan",
+            "قوانين": "أهم القوانين:\ntan = sin/cos\ncsc = 1/sin\nsec = 1/cos\ncot = 1/tan",
+            "مرحبا": "أهلاً بك! كيف يمكنني مساعدتك في الرياضيات اليوم؟"
+        };
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            let text = userInput.value.trim().toLowerCase();
+            if (text === "") return;
+
+            // إضافة رسالة المستخدم
+            appendMessage("أنت", text, "user-msg");
+            userInput.value = "";
+
+            // التفكير والرد (محاكاة الذكاء الاصطناعي)
+            setTimeout(() => {
+                let response = "عذراً، لم أفهم سؤالك جيداً. حاول سؤالي عن قيمة زاوية مثل 'sin 30' أو اكتب 'قوانين'.";
+                
+                // البحث عن كلمة مفتاحية في سؤال المستخدم
+                for (let key in botKnowledge) {
+                    if (text.includes(key)) {
+                        response = botKnowledge[key];
+                        break;
+                    }
+                }
+                appendMessage("أستاذ أيمن", response, "ai-msg");
+            }, 600); // تأخير بسيط ليبدو كأنه يكتب
+        }
+
+        function appendMessage(sender, text, className) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${className}`;
+            // استخدام innerText للحفاظ على التنسيق والأسطر الجديدة
+            msgDiv.innerText = text;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // النزول لأسفل المحادثة
+        }
+    </script>
+</body>
+</html>
