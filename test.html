@@ -6,18 +6,101 @@
     <title>MRπ - اختبار حفظي</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="test-page">
+<body>
     <header>
         <div class="logo">MRπ</div>
-        <nav><a href="index.html">الرئيسية</a></nav>
+        <nav>
+            <a href="chat.html">أستاذ أيمن</a>
+            <a href="learn.html">التعلم</a>
+            <a href="index.html">الرئيسية</a>
+        </nav>
     </header>
-    <main class="content-wrapper">
-        <div class="card quiz-page-card" style="max-width: 100%;">
-            <h2>اختبر معلوماتك</h2>
-            <p>قريباً: سيتم إضافة أسئلة تفاعلية حول الزوايا والدوال المثلثية لتقييم حفظك.</p>
-            <a href="index.html" class="btn">العودة للرئيسية</a>
+
+    <main class="main-container">
+        <div class="card text-center" id="level-screen">
+            <h2>اختر مستوى الاختبار</h2>
+            <p>اختر المستوى الذي يناسبك لتبدأ التحدي!</p>
+            <div class="levels-container" style="margin-top: 20px;">
+                <button class="btn" style="background:#4CAF50;" onclick="startQuiz('beginner')">مبتدئ</button>
+                <button class="btn" style="background:#FF9800;" onclick="startQuiz('intermediate')">متوسط</button>
+                <button class="btn" style="background:#F44336;" onclick="startQuiz('expert')">خبير</button>
+            </div>
+        </div>
+
+        <div class="card text-center" id="quiz-screen" style="display: none;">
+            <h3 id="question-text" style="margin-bottom: 20px; font-size: 24px; color: var(--blue-dark);">السؤال سيظهر هنا</h3>
+            <div id="options-container" class="options-grid"></div>
+            <p id="score-text" style="margin-top: 20px; font-weight: bold;"></p>
+            <button class="btn" id="restart-btn" style="display: none; margin-top: 20px;" onclick="location.reload()">إعادة الاختبار</button>
         </div>
     </main>
-    <footer><p>© 2026 مستر باي - جميع الحقوق محفوظة</p></footer>
+
+    <footer><p>© 2026 MRπ</p></footer>
+
+    <script>
+        const questions = {
+            beginner: [
+                { q: "ما هي قيمة sin(30°)؟", options: ["1/2", "1", "0", "√3/2"], answer: "1/2" },
+                { q: "ما هي قيمة cos(0°)؟", options: ["0", "1", "-1", "غير معرف"], answer: "1" },
+                { q: "ما هي قيمة tan(45°)؟", options: ["1/2", "0", "1", "√3"], answer: "1" }
+            ],
+            intermediate: [
+                { q: "القانون الصحيح لـ tan هو:", options: ["cos/sin", "sin/cos", "1/sin", "1/cos"], answer: "sin/cos" },
+                { q: "الدالة العكسية لـ sin هي:", options: ["sec", "cot", "tan", "csc"], answer: "csc" },
+                { q: "ما هي قيمة cos(90°)؟", options: ["1", "0", "-1", "1/2"], answer: "0" }
+            ],
+            expert: [
+                { q: "ما هو القياس بالراديان للزاوية 270°؟", options: ["π", "π/2", "3π/2", "2π"], answer: "3π/2" },
+                { q: "ما هي قيمة tan(270°)؟", options: ["0", "1", "-1", "غير معرف"], answer: "غير معرف" },
+                { q: "إذا كان sin(θ) = 1/2 و cos(θ) = √3/2، فما هي tan(θ)؟", options: ["√3/3", "√3", "1", "غير معرف"], answer: "√3/3" }
+            ]
+        };
+
+        let currentLevel = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz(level) {
+            currentLevel = questions[level];
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('level-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQuestionIndex >= currentLevel.length) {
+                endQuiz();
+                return;
+            }
+            const q = currentLevel[currentQuestionIndex];
+            document.getElementById('question-text').innerText = q.q;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = ''; // مسح الخيارات القديمة
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, q.answer);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct) {
+            if (selected === correct) score++;
+            currentQuestionIndex++;
+            showQuestion();
+        }
+
+        function endQuiz() {
+            document.getElementById('question-text').innerText = "انتهى الاختبار!";
+            document.getElementById('options-container').innerHTML = '';
+            document.getElementById('score-text').innerText = `نتيجتك: ${score} من ${currentLevel.length}`;
+            document.getElementById('restart-btn').style.display = 'inline-block';
+        }
+    </script>
 </body>
 </html>
