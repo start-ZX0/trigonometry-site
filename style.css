@@ -1,32 +1,43 @@
+/* إعدادات الألوان المتناسقة */
 :root {
     --blue-dark: #0d47a1;
     --blue-main: #1976d2;
+    --blue-light: #f0f7ff;
     --white: #ffffff;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* التنسيق الأساسي */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: sans-serif;
     background: #f5f7fa;
     direction: rtl;
+    min-height: 100vh;
 }
 
-/* إصلاح الصور في الرئيسية */
-.card-img {
-    width: 120px;
-    height: auto;
-    margin-bottom: 15px;
-}
-
+/* الهيدر وقائمة التنقل */
 header { 
     background-color: var(--blue-dark); 
     color: white; 
     padding: 1rem 5%; 
     display: flex; 
     justify-content: space-between; 
+    align-items: center; 
 }
 
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+/* الصفحة الرئيسية وإصلاح الصور */
 .hero-section { 
     background-color: var(--blue-main); 
     color: white; 
@@ -51,6 +62,14 @@ header {
     box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
 }
 
+/* تحجيم الصور في الكروت */
+.card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
 .btn { 
     background-color: var(--blue-dark); 
     color: white; 
@@ -59,40 +78,63 @@ header {
     text-decoration: none; 
     display: inline-block; 
     margin-top: 10px; 
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
-/* تنسيق المحاكي والشريط */
+/* صفحة التعلم والمحاكي */
+.main-container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+
 .visualizer-container { 
     background: var(--white); 
     padding: 20px; 
     border-radius: 15px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
     text-align: center; 
-    margin-bottom: 20px;
 }
 
 .coordinate-system { 
-    width: 250px; height: 250px; 
-    border: 2px solid #333; border-radius: 50%; 
-    position: relative; margin: 40px auto; 
+    width: 250px; 
+    height: 250px; 
+    border: 2px solid #333; 
+    border-radius: 50%; 
+    position: relative; 
+    margin: 30px auto; 
 }
 
 .axis { position: absolute; background: #000; }
 .x-axis { width: 100%; height: 2px; top: 50%; left: 0; }
 .y-axis { width: 2px; height: 100%; left: 50%; top: 0; }
+
 .vector { 
-    width: 50%; height: 3px; background: #d32f2f; 
-    position: absolute; top: 50%; left: 50%; 
-    transform-origin: left center; transform: rotate(0deg);
+    width: 50%; 
+    height: 4px; 
+    background: #d32f2f; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform-origin: left center; 
+    transform: translateY(-50%) rotate(0deg);
 }
 
 .slider-box { width: 80%; margin: 20px auto; }
 input[type="range"] { width: 100%; cursor: pointer; }
 .slider-labels { 
-    display: flex; justify-content: space-between; 
-    direction: ltr; margin-top: 10px; font-size: 14px;
+    display: flex; 
+    justify-content: space-between; 
+    direction: ltr; 
+    margin-top: 10px; 
+    font-size: 14px;
 }
 
-/* تنسيق علاقات الرياضيات (مثل الصورة) */
+.label { position: absolute; font-weight: bold; color: var(--blue-dark); }
+.p0 { right: -30px; top: 45%; }
+.p90 { top: -25px; left: 45%; }
+.p180 { left: -35px; top: 45%; }
+.p270 { bottom: -25px; left: 45%; }
+
+/* قوانين استخراج الدوال */
 .math-relations { margin: 20px 0; }
 .rel-card {
     background: white;
@@ -102,31 +144,19 @@ input[type="range"] { width: 100%; cursor: pointer; }
     border-right: 8px solid;
     text-align: left;
     direction: ltr;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 .blue-border { border-color: #1976d2; }
 .orange-border { border-color: #f57c00; }
 .purple-border { border-color: #8e24aa; }
 
 .laws-grid { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-    gap: 10px; margin-top: 20px; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 10px; 
 }
 .law-card { padding: 15px; border-radius: 8px; color: white; text-align: center; }
+.blue { background: #1976d2; } .orange { background: #f57c00; } .purple { background: #8e24aa; }
+.red { background: #e53935; } .green { background: #43a047; } .teal { background: #00897b; }
 
-.blue { background: #1976d2; }
-.orange { background: #f57c00; }
-.purple { background: #8e24aa; }
-.red { background: #e53935; }
-.green { background: #43a047; }
-.teal { background: #00897b; }
-
-.tip-box { background:#fff9c4; padding:15px; border-radius:10px; margin-top:20px; text-align: center; }
-
-.label { position: absolute; font-weight: bold; }
-.p0 { right: -30px; top: 45%; }
-.p90 { top: -25px; left: 45%; }
-.p180 { left: -35px; top: 45%; }
-.p270 { bottom: -25px; left: 45%; }
-
-footer { text-align: center; padding: 20px; background: #e3f2fd; margin-top: 30px; }
+/* الفوتر */
+footer { text-align: center; padding: 20px; background: #e3f2fd; color: var(--blue-dark); margin-top: 30px; }
