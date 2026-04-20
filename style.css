@@ -62,7 +62,7 @@ header nav a {
     box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
 }
 
-/* تحجيم الصور في الكروت */
+/* تحجيم الصور في الكروت لمنع تمددها */
 .card img {
     width: 100px;
     height: 100px;
@@ -73,7 +73,7 @@ header nav a {
 .btn { 
     background-color: var(--blue-dark); 
     color: white; 
-    padding: 10px 20px; 
+    padding: 12px 24px; 
     border-radius: 8px; 
     text-decoration: none; 
     display: inline-block; 
@@ -95,12 +95,9 @@ header nav a {
 }
 
 .coordinate-system { 
-    width: 250px; 
-    height: 250px; 
-    border: 2px solid #333; 
-    border-radius: 50%; 
-    position: relative; 
-    margin: 30px auto; 
+    width: 250px; height: 250px; 
+    border: 2px solid #333; border-radius: 50%; 
+    position: relative; margin: 30px auto; 
 }
 
 .axis { position: absolute; background: #000; }
@@ -108,25 +105,15 @@ header nav a {
 .y-axis { width: 2px; height: 100%; left: 50%; top: 0; }
 
 .vector { 
-    width: 50%; 
-    height: 4px; 
-    background: #d32f2f; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
+    width: 50%; height: 4px; background: #d32f2f; 
+    position: absolute; top: 50%; left: 50%; 
     transform-origin: left center; 
     transform: translateY(-50%) rotate(0deg);
 }
 
 .slider-box { width: 80%; margin: 20px auto; }
 input[type="range"] { width: 100%; cursor: pointer; }
-.slider-labels { 
-    display: flex; 
-    justify-content: space-between; 
-    direction: ltr; 
-    margin-top: 10px; 
-    font-size: 14px;
-}
+.slider-labels { display: flex; justify-content: space-between; direction: ltr; margin-top: 10px; font-size: 14px; }
 
 .label { position: absolute; font-weight: bold; color: var(--blue-dark); }
 .p0 { right: -30px; top: 45%; }
@@ -137,26 +124,52 @@ input[type="range"] { width: 100%; cursor: pointer; }
 /* قوانين استخراج الدوال */
 .math-relations { margin: 20px 0; }
 .rel-card {
-    background: white;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 10px;
-    border-right: 8px solid;
-    text-align: left;
-    direction: ltr;
+    background: white; margin-bottom: 10px; padding: 15px;
+    border-radius: 10px; border-right: 8px solid;
+    text-align: left; direction: ltr;
 }
 .blue-border { border-color: #1976d2; }
 .orange-border { border-color: #f57c00; }
 .purple-border { border-color: #8e24aa; }
 
-.laws-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-    gap: 10px; 
-}
+.laws-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
 .law-card { padding: 15px; border-radius: 8px; color: white; text-align: center; }
 .blue { background: #1976d2; } .orange { background: #f57c00; } .purple { background: #8e24aa; }
 .red { background: #e53935; } .green { background: #43a047; } .teal { background: #00897b; }
 
-/* الفوتر */
-footer { text-align: center; padding: 20px; background: #e3f2fd; color: var(--blue-dark); margin-top: 30px; }
+/* تنسيق الاختبار (معدل لزيادة التباعد) */
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* مسافة كبيرة بين الإجابات */
+    margin-top: 25px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quiz-option-btn {
+    background: var(--blue-light);
+    color: var(--blue-dark);
+    border: 2px solid var(--blue-main);
+    padding: 18px; /* مساحة ضغط واسعة */
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.quiz-option-btn:hover {
+    background: var(--blue-main);
+    color: white;
+}
+
+/* تنسيق الدردشة */
+.chat-box { height: 400px; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+.ai-msg { background: #e3f2fd; align-self: flex-start; padding: 10px; border-radius: 10px; }
+.user-msg { background: var(--blue-main); color: white; align-self: flex-end; padding: 10px; border-radius: 10px; }
+.chat-input-area { display: flex; gap: 10px; margin-top: 15px; }
+.chat-input-area input { flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+
+footer { text-align: center; padding: 20px; background: #e3f2fd; margin-top: 30px; }
