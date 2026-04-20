@@ -5,6 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MRπ - اختبار حفظي</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* تنسيقات جديدة ومكبرة خصيصاً لهذه الصفحة */
+        .card {
+            max-width: 600px; /* جعل الكارد أوسع قليلاً */
+            margin: 20px auto;
+            padding: 30px; /* مساحة داخلية مريحة */
+        }
+
+        .card h2, .card h3 {
+            font-size: 28px; /* تكبير حجم عنوان السؤال */
+            margin-bottom: 25px;
+        }
+
+        /* حاوية الأزرار لجعلها رأسية ومريحة للضغط */
+        .options-grid {
+            display: flex;
+            flex-direction: column; /* ترتيب رأسي */
+            gap: 20px; /* مسافة كبيرة بين الأزرار */
+            margin-top: 20px;
+        }
+
+        /* تنسيق الأزرار المكبرة (المشار إليها) */
+        .quiz-option-btn, #restart-btn {
+            background: #ffffff;
+            color: #333333;
+            border: 2px solid #333333;
+            padding: 20px 30px; /* حشوة كبيرة لزيادة مساحة الضغط */
+            border-radius: 12px; /* زوايا منحنية مريحة */
+            font-size: 24px; /* حجم خط كبير جداً */
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* ظل خفيف */
+            width: 100%; /* ملء العرض المتاح */
+            display: inline-block; /* لضمان عرض مريح للراديان */
+            text-align: center;
+        }
+
+        /* تأثير عند تمرير الماوس أو الضغط */
+        .quiz-option-btn:hover, #restart-btn:hover {
+            background-color: #f0f0f0;
+            border-color: #333333;
+            transform: translateY(-2px); /* حركة بسيطة للأعلى */
+        }
+
+        /* تنسيق خاص لأزرار الراديان (مثل π, π/2) لجعلها أكثر وضوحاً */
+        .options-grid button {
+            font-family: serif; /* خط سيريف لعرض الرموز الرياضية بشكل أفضل */
+            line-height: 1.2;
+        }
+
+        /* تحسينات للشاشة الصغيرة (الموبايل) */
+        @media (max-width: 600px) {
+            .quiz-option-btn, #restart-btn {
+                font-size: 20px; /* تصغير طفيف للخط على الموبايل لتناسب العرض */
+                padding: 15px 20px;
+            }
+            .card h2, .card h3 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,14 +85,16 @@
         </div>
 
         <div class="card" id="quiz-screen" style="display: none;">
-            <h3 id="question-text"></h3>
-            <div id="options-container" class="options-grid"></div>
-            <p id="score-text" style="margin-top: 20px; font-weight: bold;"></p>
-            <button class="btn" id="restart-btn" style="display: none;" onclick="location.reload()">إعادة</button>
+            <h3 id="question-text">السؤال سيظهر هنا</h3>
+            <div id="options-container" class="options-grid">
+                </div>
+            <p id="score-text" style="margin-top: 20px; font-weight: bold; font-size: 20px;"></p>
+            <button class="btn" id="restart-btn" style="display: none; margin-top: 20px;" onclick="location.reload()">إعادة الاختبار</button>
         </div>
     </main>
 
     <script>
+        // ... (كود الجافا سكريبت بدون تغيير) ...
         const questions = {
             beginner: [
                 { q: "ما هي قيمة sin(30°)؟", options: ["1/2", "1", "0", "√3/2"], answer: "1/2" },
@@ -54,6 +118,8 @@
             currentLevel = questions[lvl];
             document.getElementById('level-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
+            index = 0; // إعادة تعيين الفهرس عند بدء اختبار جديد
+            score = 0; // إعادة تعيين النتيجة
             showQuestion();
         }
 
@@ -62,7 +128,7 @@
                 document.getElementById('question-text').innerText = "انتهى الاختبار!";
                 document.getElementById('options-container').innerHTML = "";
                 document.getElementById('score-text').innerText = `نتيجتك: ${score} من ${currentLevel.length}`;
-                document.getElementById('restart-btn').style.display = "inline-block";
+                document.getElementById('restart-btn').style.display = "block";
                 return;
             }
             const q = currentLevel[index];
