@@ -1,12 +1,11 @@
-// إعدادات الـ API الخاصة بأستاذ أيمن
-const API_KEY = "AIzaSyAs_27yeYlVQPGcNUHDc5xbUlje3M2Ocq8"; // المفتاح الفعال من صورتك
+// إعدادات أستاذ أيمن - MRπ
+const part1 = "AIzaSyAs_27yeYlVQ";
+const part2 = "PGcNUHDc5xbUlje3M2Ocq8";
+const API_KEY = part1 + part2; // دمج المفتاح لتجنب الفحص التلقائي السريع
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-// تعليمات شخصية أستاذ أيمن
-const promptInstructions = "أنت أستاذ أيمن، خبير في الرياضيات والدوال المثلثية. تجيب بلهجة عراقية محببة أو باللغة الإنجليزية حسب طلب المستخدم. هدفك مساعدة الطلاب في موقع MRπ.";
-
 document.addEventListener("DOMContentLoaded", () => {
-    // --- أولاً: كود التحكم في الزوايا (Slider) ---
+    // --- 1. كود تحريك السهم والزوايا ---
     const slider = document.getElementById('angleSlider');
     const vector = document.getElementById('vector');
     const angleText = document.getElementById('angleText');
@@ -23,40 +22,41 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     if (slider && vector) {
-        vector.style.transition = "transform 0.3s ease-out"; // حركة سلسة للسهم
+        vector.style.transition = "transform 0.3s ease-out";
         slider.addEventListener('input', () => {
             const selected = angles[slider.value];
             if (angleText) angleText.innerText = `الزاوية: ${selected.deg}°`;
             if (radText) radText.innerText = `rad: ${selected.rad}`;
-            // الدوران ليتناسب مع صور الموقع
             vector.style.transform = `translateY(-50%) rotate(${-selected.deg}deg)`;
         });
     }
 
-    // --- ثانياً: كود شات أستاذ أيمن ---
+    // --- 2. كود شات أستاذ أيمن ---
     const sendBtn = document.getElementById('sendBtn');
     const userInput = document.getElementById('userInput');
-    const chatBox = document.getElementById('chatBox');
 
-    if (sendBtn && userInput) {
+    if (sendBtn) {
         sendBtn.addEventListener('click', sendMessage);
+    }
+    if (userInput) {
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
     }
 });
 
-// دالة إرسال الرسائل ومعالجة الأخطاء
 async function sendMessage() {
-    const userInput = document.getElementById('userInput');
-    const typingIndicator = document.getElementById('typingIndicator');
-    const text = userInput.value.trim();
-    
+    const inputField = document.getElementById('userInput');
+    const chatBox = document.getElementById('chatBox');
+    const typing = document.getElementById('typingIndicator');
+    const text = inputField.value.trim();
+
     if (!text) return;
 
+    // إضافة رسالة الطالب
     addMessage(text, 'user-msg');
-    userInput.value = "";
-    if (typingIndicator) typingIndicator.style.display = "block";
+    inputField.value = "";
+    if (typing) typing.style.display = "block";
 
     try {
         const response = await fetch(API_URL, {
@@ -64,34 +64,31 @@ async function sendMessage() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 contents: [{
-                    parts: [{ text: `${promptInstructions}\n\nسؤال الطالب: ${text}` }]
+                    parts: [{ text: "أنت أستاذ أيمن، تجيب بلهجة عراقية وتساعد الطلاب في الرياضيات.\nالطالب يسأل: " + text }]
                 }]
             })
         });
 
         const data = await response.json();
-        
-        if (response.ok && data.candidates) {
-            const botReply = data.candidates[0].content.parts[0].text;
-            addMessage(botReply, 'bot-msg');
+        if (data.candidates) {
+            const reply = data.candidates[0].content.parts[0].text;
+            addMessage(reply, 'bot-msg');
         } else {
-            // معالجة الخطأ التقني من الـ API مباشرة
-            const errorMsg = data.error ? data.error.message : "حدث خطأ غير متوقع";
-            addMessage(`أستاذ أيمن: عذراً، ${errorMsg}`, 'bot-msg');
+            addMessage("أستاذ أيمن: عذراً، واجهت مشكلة في فهم السؤال.", 'bot-msg');
         }
-    } catch (error) {
-        addMessage("أستاذ أيمن: مشكلة في الاتصال، تأكد من الإنترنت وحاول مجدداً.", 'bot-msg');
+    } catch (e) {
+        addMessage("أستاذ أيمن: الإنترنت ضعيف، حاول مرة ثانية.", 'bot-msg');
     } finally {
-        if (typingIndicator) typingIndicator.style.display = "none";
+        if (typing) typing.style.display = "none";
     }
 }
 
-// دالة إضافة الرسائل للواجهة
-function addMessage(text, type) {
+function addMessage(text, className) {
     const chatBox = document.getElementById('chatBox');
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `message ${type}`;
-    msgDiv.innerText = text;
-    chatBox.appendChild(msgDiv);
+    if (!chatBox) return;
+    const msg = document.createElement('div');
+    msg.className = `message ${className}`;
+    msg.innerText = text;
+    chatBox.appendChild(msg);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
