@@ -8,58 +8,53 @@
     <style>
         /* تنسيقات جديدة ومكبرة خصيصاً لهذه الصفحة */
         .card {
-            max-width: 600px; /* جعل الكارد أوسع قليلاً */
+            max-width: 600px;
             margin: 20px auto;
-            padding: 30px; /* مساحة داخلية مريحة */
+            padding: 30px;
         }
 
         .card h2, .card h3 {
-            font-size: 28px; /* تكبير حجم عنوان السؤال */
+            font-size: 28px;
             margin-bottom: 25px;
         }
 
-        /* حاوية الأزرار لجعلها رأسية ومريحة للضغط */
         .options-grid {
             display: flex;
-            flex-direction: column; /* ترتيب رأسي */
-            gap: 20px; /* مسافة كبيرة بين الأزرار */
+            flex-direction: column;
+            gap: 20px;
             margin-top: 20px;
         }
 
-        /* تنسيق الأزرار المكبرة (المشار إليها) */
         .quiz-option-btn, #restart-btn {
             background: #ffffff;
             color: #333333;
             border: 2px solid #333333;
-            padding: 20px 30px; /* حشوة كبيرة لزيادة مساحة الضغط */
-            border-radius: 12px; /* زوايا منحنية مريحة */
-            font-size: 24px; /* حجم خط كبير جداً */
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 24px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* ظل خفيف */
-            width: 100%; /* ملء العرض المتاح */
-            display: inline-block; /* لضمان عرض مريح للراديان */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            display: inline-block;
             text-align: center;
         }
 
-        /* تأثير عند تمرير الماوس أو الضغط */
         .quiz-option-btn:hover, #restart-btn:hover {
             background-color: #f0f0f0;
             border-color: #333333;
-            transform: translateY(-2px); /* حركة بسيطة للأعلى */
+            transform: translateY(-2px);
         }
 
-        /* تنسيق خاص لأزرار الراديان (مثل π, π/2) لجعلها أكثر وضوحاً */
         .options-grid button {
-            font-family: serif; /* خط سيريف لعرض الرموز الرياضية بشكل أفضل */
+            font-family: serif;
             line-height: 1.2;
         }
 
-        /* تحسينات للشاشة الصغيرة (الموبايل) */
         @media (max-width: 600px) {
             .quiz-option-btn, #restart-btn {
-                font-size: 20px; /* تصغير طفيف للخط على الموبايل لتناسب العرض */
+                font-size: 20px;
                 padding: 15px 20px;
             }
             .card h2, .card h3 {
@@ -88,25 +83,48 @@
             <h3 id="question-text">السؤال سيظهر هنا</h3>
             <div id="options-container" class="options-grid">
                 </div>
-            <p id="score-text" style="margin-top: 20px; font-weight: bold; font-size: 20px;"></p>
+            <p id="score-text" style="margin-top: 20px; font-weight: bold; font-size: 20px; text-align: center;"></p>
             <button class="btn" id="restart-btn" style="display: none; margin-top: 20px;" onclick="location.reload()">إعادة الاختبار</button>
         </div>
     </main>
 
     <script>
-        // ... (كود الجافا سكريبت بدون تغيير) ...
         const questions = {
             beginner: [
-                { q: "ما هي قيمة sin(30°)؟", options: ["1/2", "1", "0", "√3/2"], answer: "1/2" },
-                { q: "ما هي قيمة cos(0°)؟", options: ["0", "1", "1/2", "√3/2"], answer: "1" }
+                { q: "احسب sin(0°)", options: ["1", "0", "-1", "غير معرف"], answer: "0" },
+                { q: "احسب cos(0°)", options: ["0", "1", "1/2", "-1"], answer: "1" },
+                { q: "احسب sin(30°)", options: ["1/2", "√3/2", "1", "0"], answer: "1/2" },
+                { q: "احسب cos(30°)", options: ["1/2", "√3/2", "1/√2", "1"], answer: "√3/2" },
+                { q: "احسب tan(45°)", options: ["0", "1/√3", "1", "√3"], answer: "1" },
+                { q: "احسب sin(60°)", options: ["1/2", "1/√2", "√3/2", "1"], answer: "√3/2" },
+                { q: "احسب cos(90°)", options: ["1", "0", "-1", "غير معرف"], answer: "0" },
+                { q: "هل tan(90°) معرفة؟", options: ["نعم", "لا (غير معرفة)", "تساوي 0", "تساوي 1"], answer: "لا (غير معرفة)" },
+                { q: "احسب sin(180°)", options: ["1", "0", "-1", "غير معرف"], answer: "0" },
+                { q: "احسب cos(180°)", options: ["1", "0", "-1", "غير معرف"], answer: "-1" },
+                { q: "أكمل القانون: sin²θ + cos²θ = ?", options: ["0", "1", "tanθ", "-1"], answer: "1" },
+                { q: "أكمل القانون: tanθ = ?", options: ["cos/sin", "1/sin", "sin/cos", "1/cos"], answer: "sin/cos" }
             ],
             intermediate: [
-                { q: "قانون tan هو:", options: ["sin/cos", "cos/sin", "1/sin", "1/cos"], answer: "sin/cos" },
-                { q: "الدالة العكسية لـ sin هي:", options: ["csc", "sec", "cot", "tan"], answer: "csc" }
+                { q: "احسب: sin(30°) + cos(60°)", options: ["1", "1/2", "√3", "0"], answer: "1" },
+                { q: "احسب: sin(45°) × cos(45°)", options: ["1", "1/2", "1/√2", "2"], answer: "1/2" },
+                { q: "احسب: tan(45°) + sin(30°)", options: ["3/2", "1", "1/2", "2"], answer: "3/2" },
+                { q: "احسب: sin(90°) + cos(90°)", options: ["0", "1", "-1", "2"], answer: "1" },
+                { q: "احسب: sin(180°) + cos(180°)", options: ["0", "1", "-1", "-2"], answer: "-1" },
+                { q: "احسب: tan(30°) × tan(60°)", options: ["1", "√3", "1/3", "0"], answer: "1" },
+                { q: "احسب: cos²(60°)", options: ["1/2", "1/4", "3/4", "1"], answer: "1/4" },
+                { q: "احسب: sin(270°) + cos(270°)", options: ["1", "0", "-1", "-2"], answer: "-1" },
+                { q: "احسب: sin(360°) × cos(360°)", options: ["1", "0", "-1", "غير معرف"], answer: "0" },
+                { q: "احسب: 2 × sin(30°)", options: ["1", "1/2", "2", "0"], answer: "1" }
             ],
             expert: [
-                { q: "الزاوية 180° بالراديان تساوي:", options: ["π", "π/2", "2π", "3π/2"], answer: "π" },
-                { q: "قيمة tan(90°) هي:", options: ["غير معرف", "1", "0", "-1"], answer: "غير معرف" }
+                { q: "مقلوب دالة الجيب (1/sin) يسمى:", options: ["sec (القاطع)", "csc (قاطع التمام)", "cot (ظل التمام)", "tan (الظل)"], answer: "csc (قاطع التمام)" },
+                { q: "ما هي إشارة دالة cos في الربع الثاني؟", options: ["موجبة", "سالبة", "صفر", "غير معرفة"], answer: "سالبة" },
+                { q: "إذا كان sin(θ) = 1/2 والزاوية في الربع الأول، فما هي الزاوية؟", options: ["30° (π/6)", "45° (π/4)", "60° (π/3)", "90° (π/2)"], answer: "30° (π/6)" },
+                { q: "قانون ضعف الزاوية sin(2x) يساوي:", options: ["2sin(x)", "sin²(x) - cos²(x)", "2sin(x)cos(x)", "1 - 2sin²(x)"], answer: "2sin(x)cos(x)" },
+                { q: "الزاوية 270° بالراديان تكتب كـ:", options: ["π", "3π/2", "2π", "5π/6"], answer: "3π/2" },
+                { q: "أي من الدوال التالية موجبة دائماً في الربع الثالث؟", options: ["sin و csc", "cos و sec", "tan و cot", "جميع الدوال"], answer: "tan و cot" },
+                { q: "ما هي قيمة المعادلة: sec²θ - tan²θ = ?", options: ["0", "-1", "1", "sinθ"], answer: "1" },
+                { q: "المدى (Range) لدالتي sin و cos يقع دائماً بين:", options: ["0 و 1", "-1 و 1", "-∞ و +∞", "1 و 2"], answer: "-1 و 1" }
             ]
         };
 
@@ -114,32 +132,76 @@
         let index = 0;
         let score = 0;
 
+        // دالة لخلط ترتيب المصفوفة عشوائياً (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
         function startQuiz(lvl) {
-            currentLevel = questions[lvl];
+            // نأخذ نسخة من أسئلة المستوى
+            let allQuestions = [...questions[lvl]];
+            
+            // نخلط ترتيب الأسئلة
+            shuffleArray(allQuestions);
+            
+            // نختار أول 20 سؤال (أو أقل إذا كانت القائمة أصغر من 20)
+            currentLevel = allQuestions.slice(0, 20); 
+
             document.getElementById('level-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
-            index = 0; // إعادة تعيين الفهرس عند بدء اختبار جديد
-            score = 0; // إعادة تعيين النتيجة
+            index = 0; 
+            score = 0; 
+            document.getElementById('score-text').innerText = "";
+            document.getElementById('restart-btn').style.display = "none";
             showQuestion();
         }
 
         function showQuestion() {
             if (index >= currentLevel.length) {
-                document.getElementById('question-text').innerText = "انتهى الاختبار!";
+                const percentage = Math.round((score / currentLevel.length) * 100);
+                document.getElementById('question-text').innerText = "انتهى الاختبار! 🎉";
                 document.getElementById('options-container').innerHTML = "";
-                document.getElementById('score-text').innerText = `نتيجتك: ${score} من ${currentLevel.length}`;
+                
+                document.getElementById('score-text').innerHTML = `
+                    <span style="font-size: 28px; color: ${percentage >= 50 ? '#28a745' : '#dc3545'};">
+                        النتيجة: ${percentage}%
+                    </span>
+                    <br>
+                    <span style="font-size: 16px; color: #555;">
+                        (أجبت بشكل صحيح على ${score} من أصل ${currentLevel.length} أسئلة)
+                    </span>
+                `;
                 document.getElementById('restart-btn').style.display = "block";
                 return;
             }
+            
             const q = currentLevel[index];
-            document.getElementById('question-text').innerText = q.q;
+            // عرض رقم السؤال الحالي بالنسبة للمجموع
+            document.getElementById('question-text').innerText = `(${index + 1}/${currentLevel.length}) ${q.q}`;
+            
             const container = document.getElementById('options-container');
             container.innerHTML = "";
-            q.options.forEach(opt => {
+            
+            // نأخذ نسخة من الخيارات ونخلطها
+            let shuffledOptions = [...q.options];
+            shuffleArray(shuffledOptions);
+            
+            // بناء الأزرار بالترتيب العشوائي الجديد
+            shuffledOptions.forEach(opt => {
                 const b = document.createElement('button');
                 b.className = "quiz-option-btn";
                 b.innerText = opt;
-                b.onclick = () => { if(opt === q.answer) score++; index++; showQuestion(); };
+                b.onclick = () => { 
+                    if(opt === q.answer) score++; 
+                    index++; 
+                    showQuestion(); 
+                };
                 container.appendChild(b);
             });
         }
