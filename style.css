@@ -15,22 +15,18 @@
     padding: 0;
 }
 
-/* حماية من التمدد */
+/* منع التمدد */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
-}
-
-body {
     font-family: sans-serif;
     background: var(--bg);
     direction: rtl;
     min-height: 100vh;
 }
 
-/* حماية عامة لأي عنصر */
-img, iframe, embed, object {
-    max-width: 100% !important;
+img, iframe {
+    max-width: 100%;
     height: auto;
     display: block;
 }
@@ -38,47 +34,45 @@ img, iframe, embed, object {
 /* =========================
    الهيدر
 ========================= */
-header { 
-    background-color: var(--blue-dark); 
-    color: white; 
-    padding: 1rem 5%; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+header {
+    background: var(--blue-dark);
+    color: white;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* =========================
    الصفحة الرئيسية
 ========================= */
-.hero-section { 
-    background-color: var(--blue-main); 
-    color: white; 
-    text-align: center; 
+.hero-section {
+    background: var(--blue-main);
+    color: white;
+    text-align: center;
     padding: 60px 20px 80px;
-    width: 100%;
-    overflow: hidden;
 }
 
-.hero-section h1 { 
-    font-size: clamp(1.5rem, 5vw, 3rem); 
+.hero-section h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
 }
 
 /* الكروت */
-.cards-container { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 20px; 
-    max-width: 1100px; 
-    margin: 20px auto 40px; 
-    padding: 0 20px; 
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 20px auto 40px;
+    padding: 0 20px;
 }
 
-.card { 
-    background: var(--white); 
-    border-radius: 15px; 
-    padding: 25px; 
-    text-align: center; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .card img {
@@ -86,186 +80,173 @@ header {
     margin: 0 auto 10px;
 }
 
-.btn { 
-    background-color: var(--blue-dark); 
-    color: white; 
-    padding: 10px 20px; 
-    border-radius: 8px; 
-    text-decoration: none; 
-    display: inline-block; 
-    margin-top: 10px; 
-    font-weight: bold; 
+.btn {
+    background: var(--blue-dark);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 /* =========================
    صفحة التعلم
 ========================= */
-.main-container { 
-    max-width: 1100px; 
-    margin: 20px auto; 
-    padding: 0 15px; 
-    width: 100%; 
+.main-container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 15px;
 }
 
-.visualizer-container { 
-    background: var(--white); 
-    padding: 20px; 
-    border-radius: 15px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-    text-align: center; 
-    margin-bottom: 30px; 
+.visualizer-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-.visual-layout { 
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 40px; 
-    align-items: center; 
-    margin-top: 20px; 
+/* الدائرة */
+.coordinate-system {
+    width: min(280px, 90vw);
+    height: min(280px, 90vw);
+    border: 2px solid #333;
+    border-radius: 50%;
+    position: relative;
+    margin: 30px auto;
 }
 
-/* =========================
-   الدائرة (مهم جدًا)
-========================= */
-.coordinate-system { 
-    width: min(280px, 90vw); 
-    height: min(280px, 90vw); 
-    border: 2px solid #333; 
-    border-radius: 50%; 
-    position: relative; 
-    margin: 30px auto; 
+.axis {
+    position: absolute;
+    background: black;
 }
 
-.axis { position: absolute; background: #000; }
-.x-axis { width: 100%; height: 2px; top: 50%; left: 0; }
-.y-axis { width: 2px; height: 100%; left: 50%; top: 0; }
+.x-axis {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+}
 
-.vector { 
-    width: 50%; 
-    height: 4px; 
-    background: #d32f2f; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform-origin: left center; 
-    transition: 0.3s; 
+.y-axis {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+}
+
+.vector {
+    width: 50%;
+    height: 4px;
+    background: #d32f2f;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: left center;
 }
 
 /* الزوايا */
-.label { 
-    position: absolute; 
-    font-weight: bold; 
-    color: var(--blue-dark); 
-    font-size: 14px; 
-    background: var(--white); 
-    padding: 2px 4px; 
-    border-radius: 4px; 
+.label {
+    position: absolute;
+    font-weight: bold;
+    font-size: 14px;
+    background: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: var(--blue-dark);
 }
 
-.p0 { right: -30px; top: 50%; transform: translateY(-50%); } 
-.p90 { top: -25px; left: 50%; transform: translateX(-50%); } 
-.p180 { left: -35px; top: 50%; transform: translateY(-50%); } 
+.p0 { right: -30px; top: 50%; transform: translateY(-50%); }
+.p90 { top: -25px; left: 50%; transform: translateX(-50%); }
+.p180 { left: -35px; top: 50%; transform: translateY(-50%); }
 .p270 { bottom: -25px; left: 50%; transform: translateX(-50%); }
-/* إعادة ألوان جدول learn بشكل واضح */
-table tr:nth-child(1) th {
+
+/* =========================
+   جدول القيم (الألوان الأصلية)
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th {
     background: #0d47a1;
     color: white;
+    padding: 10px;
 }
 
-/* صف sin */
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* sin */
 table tr:nth-child(2) td {
     background: #e8f5e9;
     color: #1b5e20;
     font-weight: bold;
 }
 
-/* صف cos */
+/* cos */
 table tr:nth-child(3) td {
     background: #fff3e0;
     color: #e65100;
     font-weight: bold;
 }
 
-/* صف tan */
+/* tan */
 table tr:nth-child(4) td {
     background: #f3e5f5;
     color: #6a1b9a;
     font-weight: bold;
 }
 
-/* تحسين شكل الخلايا */
-table td, table th {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
 /* =========================
    القوانين
 ========================= */
-.laws-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-    gap: 15px; 
-    margin: 20px 0;
+.laws-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.law-card { 
-    padding: 15px; 
-    border-radius: 10px; 
-    text-align: center; 
-    color: white; 
+.law-card {
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
 }
 
 .blue { background: #1976d2; }
 .orange { background: #f57c00; }
-.purple { background: #7b1fa2; }
-.red { background: #d32f2f; }
-.green { background: #388e3c; }
-.teal { background: #00796b; }
+.purple { background: #8e24aa; }
+.red { background: #e53935; }
+.green { background: #43a047; }
+.teal { background: #00897b; }
 
 /* =========================
    الفوتر
 ========================= */
-footer { 
-    text-align: center; 
-    padding: 20px; 
-    background: #e3f2fd; 
-    color: var(--blue-dark); 
-    margin-top: 30px; 
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #e3f2fd;
+    color: var(--blue-dark);
+    margin-top: 30px;
 }
 
 /* =========================
-   الموبايل
+   موبايل
 ========================= */
 @media (max-width: 768px) {
-
-    .cards-container { 
-        grid-template-columns: 1fr; 
+    .cards-container {
+        grid-template-columns: 1fr;
     }
 
-    .visual-layout { 
-        flex-direction: column; 
-        gap: 20px; 
-    }
-
-    .coordinate-system { 
-        width: 220px; 
-        height: 220px; 
-    }
-
-    .label { 
-        font-size: 11px; 
-    }
-
-    .laws-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-    }
-}
-
-@media (max-width: 480px) {
-    .laws-grid { 
-        grid-template-columns: 1fr; 
+    .coordinate-system {
+        width: 220px;
+        height: 220px;
     }
 }
