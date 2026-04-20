@@ -3,64 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn MRπ</title>
+    <title>MRπ - Learn</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <div>MRπ</div>
-    <a href="index.html">رجوع</a>
+    <div class="logo">MRπ</div>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+    </nav>
 </header>
 
 <main class="main-container">
 
-    <h2 id="angleText">الزاوية: 0°</h2>
-    <h3 id="radText">π / 0</h3>
+    <section class="visualizer-container">
 
-    <div class="coordinate-system">
-        <div class="axis x-axis"></div>
-        <div class="axis y-axis"></div>
-        <div class="vector" id="vector"></div>
-    </div>
+        <h2 id="angleText">الزاوية: 0°</h2>
 
-    <!-- السلايدر -->
-    <input type="range" id="slider" min="0" max="6" value="0">
+        <div class="coordinate-system">
+            <div class="axis x-axis"></div>
+            <div class="axis y-axis"></div>
+            <div id="vector" class="vector"></div>
 
-    <div style="text-align:center;margin-top:10px;">
-        <small>0 - 30 - 45 - 60 - 90 - 180 - 270</small>
+            <span class="label p0">0°</span>
+            <span class="label p90">90°</span>
+            <span class="label p180">180°</span>
+            <span class="label p270">270°</span>
+        </div>
+
+    </section>
+
+    <!-- القوانين (تم إرجاعها) -->
+    <section class="laws-grid">
+
+        <div class="law-card blue">
+            sin = المقابل / الوتر
+        </div>
+
+        <div class="law-card orange">
+            cos = المجاور / الوتر
+        </div>
+
+        <div class="law-card purple">
+            tan = sin / cos
+        </div>
+
+        <div class="law-card red">
+            csc = 1 / sin
+        </div>
+
+        <div class="law-card green">
+            sec = 1 / cos
+        </div>
+
+        <div class="law-card teal">
+            cot = 1 / tan
+        </div>
+
+    </section>
+
+    <!-- النصيحة (تم إرجاعها) -->
+    <div style="background:#fff9c4;padding:15px;border-radius:10px;margin-top:20px;">
+        <strong>💡 نصيحة:</strong>
+        <p>قم بحفظ الجدول والقوانين جيداً ثم اختبر نفسك في قسم الاختبار</p>
     </div>
 
 </main>
-
-<script>
-const data = [
-    {deg:0, rad:"0", s:0, c:1, t:0},
-    {deg:30, rad:"π/6", s:"1/2", c:"√3/2", t:"√3/3"},
-    {deg:45, rad:"π/4", s:"√2/2", c:"√2/2", t:"1"},
-    {deg:60, rad:"π/3", s:"√3/2", c:"1/2", t:"√3"},
-    {deg:90, rad:"π/2", s:"1", c:"0", t:"∞"},
-    {deg:180, rad:"π", s:"0", c:"-1", t:"0"},
-    {deg:270, rad:"3π/2", s:"-1", c:"0", t:"∞"}
-];
-
-const slider = document.getElementById("slider");
-
-slider.addEventListener("input", function() {
-
-    const v = data[this.value];
-
-    document.getElementById("angleText").innerText =
-        "الزاوية: " + v.deg + "°";
-
-    document.getElementById("radText").innerText =
-        "rad: " + v.rad;
-
-    document.getElementById("vector").style.transform =
-        "rotate(" + (-v.deg) + "deg)";
-});
-</script>
 
 </body>
 </html>
