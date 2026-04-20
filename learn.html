@@ -6,7 +6,6 @@
     <title>MRπ - Learn</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
@@ -17,60 +16,59 @@
 </header>
 
 <main class="main-container">
-
     <section class="visualizer-container">
-
         <h2 id="angleText">الزاوية: 0°</h2>
+        <p id="radText">rad: 0</p>
 
         <div class="coordinate-system">
             <div class="axis x-axis"></div>
             <div class="axis y-axis"></div>
             <div id="vector" class="vector"></div>
-
             <span class="label p0">0°</span>
             <span class="label p90">90°</span>
             <span class="label p180">180°</span>
             <span class="label p270">270°</span>
         </div>
 
+        <div class="slider-box">
+            <input type="range" id="angleSlider" min="0" max="6" step="1" value="0">
+            <div class="slider-labels">
+                <span>270</span><span>180</span><span>90</span><span>60</span><span>45</span><span>30</span><span>0</span>
+            </div>
+        </div>
     </section>
 
-    <!-- القوانين (تم إرجاعها) -->
+    <section class="math-relations">
+        <div class="rel-card blue-border">
+            <p>To find Tangent:</p>
+            <p>tan(θ) = sin(θ) / cos(θ)</p>
+        </div>
+        <div class="rel-card orange-border">
+            <p>To find Sine:</p>
+            <p>sin(θ) = tan(θ) × cos(θ)</p>
+        </div>
+        <div class="rel-card purple-border">
+            <p>To find Cosine:</p>
+            <p>cos(θ) = sin(θ) / tan(θ)</p>
+        </div>
+    </section>
+
     <section class="laws-grid">
-
-        <div class="law-card blue">
-            sin = المقابل / الوتر
-        </div>
-
-        <div class="law-card orange">
-            cos = المجاور / الوتر
-        </div>
-
-        <div class="law-card purple">
-            tan = sin / cos
-        </div>
-
-        <div class="law-card red">
-            csc = 1 / sin
-        </div>
-
-        <div class="law-card green">
-            sec = 1 / cos
-        </div>
-
-        <div class="law-card teal">
-            cot = 1 / tan
-        </div>
-
+        <div class="law-card blue">sin = المقابل / الوتر</div>
+        <div class="law-card orange">cos = المجاور / الوتر</div>
+        <div class="law-card purple">tan = sin / cos</div>
+        <div class="law-card red">csc = 1 / sin</div>
+        <div class="law-card green">sec = 1 / cos</div>
+        <div class="law-card teal">cot = 1 / tan</div>
     </section>
 
-    <!-- النصيحة (تم إرجاعها) -->
-    <div style="background:#fff9c4;padding:15px;border-radius:10px;margin-top:20px;">
+    <div class="tip-box">
         <strong>💡 نصيحة:</strong>
         <p>قم بحفظ الجدول والقوانين جيداً ثم اختبر نفسك في قسم الاختبار</p>
+        <a href="test.html" class="btn">انتقل للاختبار</a>
     </div>
-
 </main>
 
+<script src="script.js"></script>
 </body>
 </html>
