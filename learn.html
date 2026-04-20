@@ -3,76 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRπ - Learn</title>
+    <title>MRπ - المحاكي التفاعلي</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-    <div>MRπ</div>
-    <nav><a href="index.html" style="color:white;">الرئيسية</a></nav>
+    <div class="logo">MRπ</div>
+    <nav><a href="index.html">الرئيسية</a></nav>
 </header>
 
 <main class="main-container">
 
-    <!-- المحاكي -->
     <section class="visualizer-container">
-        <h2>المحاكي التفاعلي</h2>
+
+        <h2 id="angleText">الزاوية: 0°</h2>
 
         <div class="coordinate-system">
             <div class="axis x-axis"></div>
             <div class="axis y-axis"></div>
-            <div class="vector" id="vector"></div>
+            <div id="vector" class="vector"></div>
+
+            <span class="label p0">0°</span>
+            <span class="label p90">90°</span>
+            <span class="label p180">180°</span>
+            <span class="label p270">270°</span>
         </div>
+
     </section>
 
-    <!-- الجدول -->
     <section class="table-wrapper">
+
         <table>
             <tr>
-                <th>الدالة</th>
+                <th>الزاوية</th>
                 <th>0°</th>
                 <th>30°</th>
                 <th>45°</th>
                 <th>60°</th>
                 <th>90°</th>
+                <th>180°</th>
+                <th>270°</th>
+                <th>360°</th>
             </tr>
 
             <tr class="sin-row">
                 <td>sin</td>
-                <td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td>
+                <td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td><td>0</td><td>-1</td><td>0</td>
             </tr>
 
             <tr class="cos-row">
                 <td>cos</td>
-                <td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td>
+                <td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td><td>-1</td><td>0</td><td>1</td>
             </tr>
 
             <tr class="tan-row">
                 <td>tan</td>
-                <td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>∞</td>
+                <td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>∞</td><td>0</td><td>∞</td><td>0</td>
             </tr>
+
         </table>
+
     </section>
 
-    <!-- القوانين الجديدة -->
     <section class="laws-grid">
 
-        <div class="law-card blue">
-            To find Tangent:<br>
-            tan(θ) = sin(θ) / cos(θ)
-        </div>
-
-        <div class="law-card orange">
-            To find Sine:<br>
-            sin(θ) = tan(θ) × cos(θ)
-        </div>
-
-        <div class="law-card purple">
-            To find Cosine:<br>
-            cos(θ) = sin(θ) / tan(θ)
-        </div>
+        <div class="law-card blue">sin = المقابل/الوتر</div>
+        <div class="law-card orange">cos = المجاور/الوتر</div>
+        <div class="law-card purple">tan = sin/cos</div>
+        <div class="law-card red">csc = 1/sin</div>
+        <div class="law-card green">sec = 1/cos</div>
+        <div class="law-card teal">cot = 1/tan</div>
 
     </section>
 
