@@ -3,93 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRπ - أستاذ أيمن</title>
-    <link rel="stylesheet" href="style.css">
+    <title>MRπ - محادثة مع أستاذ أيمن</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        header { background-color: #0d47a1; color: white; padding: 15px; text-align: center; font-size: 1.2rem; font-weight: bold; position: relative; }
+        .back-btn { position: absolute; right: 15px; top: 15px; color: white; text-decoration: none; font-size: 0.9rem; border: 1px solid white; padding: 2px 10px; border-radius: 5px; }
+        #chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .msg { max-width: 80%; padding: 12px 18px; border-radius: 15px; line-height: 1.4; font-size: 1rem; position: relative; }
+        .user-msg { align-self: flex-start; background-color: #e3f2fd; color: #0d47a1; border-bottom-right-radius: 2px; }
+        .bot-msg { align-self: flex-end; background-color: white; color: #333; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .input-area { background: white; padding: 15px; display: flex; gap: 10px; border-top: 1px solid #ddd; }
+        input { flex: 1; border: 1px solid #ccc; padding: 12px; border-radius: 25px; outline: none; font-size: 1rem; }
+        button { background: #0d47a1; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #1565c0; }
+        .typing { font-style: italic; color: #777; font-size: 0.8rem; margin-bottom: 10px; display: none; }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo">MRπ</div>
-        <nav>
-            <a href="test.html">اختبار</a>
-            <a href="learn.html">التعلم</a>
-            <a href="index.html">الرئيسية</a>
-        </nav>
-    </header>
 
-    <main class="main-container">
-        <div class="card chat-card">
-            <h2 style="text-align: center; color: var(--blue-dark); border-bottom: 2px solid #eee; padding-bottom: 10px;">👨‍🏫 أستاذ أيمن</h2>
-            
-            <div class="chat-box" id="chat-box">
-                <div class="message ai-msg">أهلاً بك يا بطل! أنا أستاذ أيمن. يمكنك سؤالي عن قيمة أي زاوية (مثال: كم sin 30) أو عن القوانين.</div>
-            </div>
+<header>
+    أستاذ أيمن - المساعد الذكي
+    <a href="index.html" class="back-btn">رجوع</a>
+</header>
 
-            <div class="chat-input-area">
-                <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." onkeypress="handleEnter(event)">
-                <button class="btn" onclick="sendMessage()">إرسال</button>
-            </div>
-        </div>
-    </main>
+<div id="chat-container">
+    <div class="msg bot-msg">أهلاً بك! أنا أستاذ أيمن، كيف يمكنني مساعدتك في عالم الدوال المثلثية اليوم؟</div>
+</div>
 
-    <script>
-        const chatBox = document.getElementById('chat-box');
-        const userInput = document.getElementById('user-input');
+<div id="typing-indicator" class="typing" style="padding: 0 20px;">أستاذ أيمن يفكر الآن...</div>
 
-        // قاموس إجابات أستاذ أيمن (الذكاء الاصطناعي البسيط)
-        const botKnowledge = {
-            "sin 0": "قيمة sin(0°) هي 0",
-            "sin 30": "قيمة sin(30°) هي 1/2",
-            "sin 45": "قيمة sin(45°) هي √2/2",
-            "sin 60": "قيمة sin(60°) هي √3/2",
-            "sin 90": "قيمة sin(90°) هي 1",
-            "cos 0": "قيمة cos(0°) هي 1",
-            "cos 30": "قيمة cos(30°) هي √3/2",
-            "cos 45": "قيمة cos(45°) هي √2/2",
-            "cos 60": "قيمة cos(60°) هي 1/2",
-            "cos 90": "قيمة cos(90°) هي 0",
-            "tan": "قانون التان هو: tan = sin / cos",
-            "csc": "قانون القاطع التمام هو: csc = 1 / sin",
-            "sec": "قانون القاطع هو: sec = 1 / cos",
-            "cot": "قانون ظل التمام هو: cot = 1 / tan",
-            "قوانين": "أهم القوانين:\ntan = sin/cos\ncsc = 1/sin\nsec = 1/cos\ncot = 1/tan",
-            "مرحبا": "أهلاً بك! كيف يمكنني مساعدتك في الرياضيات اليوم؟"
-        };
+<div class="input-area">
+    <input type="text" id="user-input" placeholder="اكتب سؤالك هنا (عربي، English، أو عامي)..." onkeypress="handleKey(event)">
+    <button onclick="sendMessage()">إرسال</button>
+</div>
 
-        function handleEnter(e) {
-            if (e.key === 'Enter') sendMessage();
+<script>
+    // مفتاح الـ API الخاص بك
+    const API_KEY = "AIzaSyAs_27yeYlVQPGcNUHDc5xbUlje3M2Ocq8"; 
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+    const typingIndicator = document.getElementById('typing-indicator');
+
+    // تعليمات الشخصية (System Prompt) لجعله مرناً
+    const promptInstructions = "أنت أستاذ رياضيات خبير اسمه (أستاذ أيمن). وظيفتك مساعدة الطلاب في موقع 'MRπ' لتعلم الدوال المثلثية. كن ودوداً جداً ومرناً. إذا تحدث الطالب بلهجة عامية، أجب بأسلوب قريب منه ومحبب. إذا سأل بالإنجليزية، أجب بالإنجليزية. بسط القوانين الصعبة واستخدم أمثلة من الواقع.";
+
+    async function sendMessage() {
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        addMessage(text, 'user-msg');
+        userInput.value = "";
+        typingIndicator.style.display = "block";
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: `${promptInstructions}\n\nسؤال المستخدم: ${text}` }]
+                    }]
+                })
+            });
+
+            const data = await response.json();
+            const botReply = data.candidates[0].content.parts[0].text;
+
+            typingIndicator.style.display = "none";
+            addMessage(botReply, 'bot-msg');
+        } catch (error) {
+            typingIndicator.style.display = "none";
+            addMessage("عذراً، حدث خطأ في الاتصال. حاول مرة أخرى.", 'bot-msg');
         }
+    }
 
-        function sendMessage() {
-            let text = userInput.value.trim().toLowerCase();
-            if (text === "") return;
+    function addMessage(text, className) {
+        const div = document.createElement('div');
+        div.className = `msg ${className}`;
+        div.innerText = text;
+        chatContainer.appendChild(div);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
 
-            // إضافة رسالة المستخدم
-            appendMessage("أنت", text, "user-msg");
-            userInput.value = "";
+    function handleKey(e) {
+        if (e.key === 'Enter') sendMessage();
+    }
+</script>
 
-            // التفكير والرد (محاكاة الذكاء الاصطناعي)
-            setTimeout(() => {
-                let response = "عذراً، لم أفهم سؤالك جيداً. حاول سؤالي عن قيمة زاوية مثل 'sin 30' أو اكتب 'قوانين'.";
-                
-                // البحث عن كلمة مفتاحية في سؤال المستخدم
-                for (let key in botKnowledge) {
-                    if (text.includes(key)) {
-                        response = botKnowledge[key];
-                        break;
-                    }
-                }
-                appendMessage("أستاذ أيمن", response, "ai-msg");
-            }, 600); // تأخير بسيط ليبدو كأنه يكتب
-        }
-
-        function appendMessage(sender, text, className) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `message ${className}`;
-            // استخدام innerText للحفاظ على التنسيق والأسطر الجديدة
-            msgDiv.innerText = text;
-            chatBox.appendChild(msgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight; // النزول لأسفل المحادثة
-        }
-    </script>
 </body>
 </html>
