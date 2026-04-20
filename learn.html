@@ -3,81 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRπ - المحاكي التفاعلي</title>
+    <title>Learn MRπ</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
-    <div class="logo">MRπ</div>
-    <nav><a href="index.html">الرئيسية</a></nav>
+    <div>MRπ</div>
+    <a href="index.html">رجوع</a>
 </header>
 
 <main class="main-container">
 
-    <section class="visualizer-container">
+    <h2 id="angleText">الزاوية: 0°</h2>
+    <h3 id="radText">π / 0</h3>
 
-        <h2 id="angleText">الزاوية: 0°</h2>
+    <div class="coordinate-system">
+        <div class="axis x-axis"></div>
+        <div class="axis y-axis"></div>
+        <div class="vector" id="vector"></div>
+    </div>
 
-        <div class="coordinate-system">
-            <div class="axis x-axis"></div>
-            <div class="axis y-axis"></div>
-            <div id="vector" class="vector"></div>
+    <!-- السلايدر -->
+    <input type="range" id="slider" min="0" max="6" value="0">
 
-            <span class="label p0">0°</span>
-            <span class="label p90">90°</span>
-            <span class="label p180">180°</span>
-            <span class="label p270">270°</span>
-        </div>
-
-    </section>
-
-    <section class="table-wrapper">
-
-        <table>
-            <tr>
-                <th>الزاوية</th>
-                <th>0°</th>
-                <th>30°</th>
-                <th>45°</th>
-                <th>60°</th>
-                <th>90°</th>
-                <th>180°</th>
-                <th>270°</th>
-                <th>360°</th>
-            </tr>
-
-            <tr class="sin-row">
-                <td>sin</td>
-                <td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td><td>0</td><td>-1</td><td>0</td>
-            </tr>
-
-            <tr class="cos-row">
-                <td>cos</td>
-                <td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td><td>-1</td><td>0</td><td>1</td>
-            </tr>
-
-            <tr class="tan-row">
-                <td>tan</td>
-                <td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>∞</td><td>0</td><td>∞</td><td>0</td>
-            </tr>
-
-        </table>
-
-    </section>
-
-    <section class="laws-grid">
-
-        <div class="law-card blue">sin = المقابل/الوتر</div>
-        <div class="law-card orange">cos = المجاور/الوتر</div>
-        <div class="law-card purple">tan = sin/cos</div>
-        <div class="law-card red">csc = 1/sin</div>
-        <div class="law-card green">sec = 1/cos</div>
-        <div class="law-card teal">cot = 1/tan</div>
-
-    </section>
+    <div style="text-align:center;margin-top:10px;">
+        <small>0 - 30 - 45 - 60 - 90 - 180 - 270</small>
+    </div>
 
 </main>
+
+<script>
+const data = [
+    {deg:0, rad:"0", s:0, c:1, t:0},
+    {deg:30, rad:"π/6", s:"1/2", c:"√3/2", t:"√3/3"},
+    {deg:45, rad:"π/4", s:"√2/2", c:"√2/2", t:"1"},
+    {deg:60, rad:"π/3", s:"√3/2", c:"1/2", t:"√3"},
+    {deg:90, rad:"π/2", s:"1", c:"0", t:"∞"},
+    {deg:180, rad:"π", s:"0", c:"-1", t:"0"},
+    {deg:270, rad:"3π/2", s:"-1", c:"0", t:"∞"}
+];
+
+const slider = document.getElementById("slider");
+
+slider.addEventListener("input", function() {
+
+    const v = data[this.value];
+
+    document.getElementById("angleText").innerText =
+        "الزاوية: " + v.deg + "°";
+
+    document.getElementById("radText").innerText =
+        "rad: " + v.rad;
+
+    document.getElementById("vector").style.transform =
+        "rotate(" + (-v.deg) + "deg)";
+});
+</script>
 
 </body>
 </html>
