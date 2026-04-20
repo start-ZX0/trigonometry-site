@@ -3,95 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRπ - Learn</title>
+    <title>MRπ - تعلم</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
     <div class="logo">MRπ</div>
-    <nav>
-        <a href="index.html">الرئيسية</a>
-    </nav>
+    <nav><a href="index.html">رجوع</a></nav>
 </header>
 
 <main class="main-container">
     <section class="visualizer-container">
         <h2 id="angleText">الزاوية: 0°</h2>
-        <p id="radText">rad: 0</p>
+        <div class="math-display">
+            <span id="sinVal" style="color: #d32f2f;">sin: 0</span> | 
+            <span id="cosVal" style="color: #1976d2;">cos: 1</span>
+        </div>
 
         <div class="coordinate-system">
             <div class="axis x-axis"></div>
             <div class="axis y-axis"></div>
             <div id="vector" class="vector"></div>
-            <span class="label p0">0°</span>
-            <span class="label p90">90°</span>
-            <span class="label p180">180°</span>
-            <span class="label p270">270°</span>
         </div>
 
-        <div class="slider-box">
-            <input type="range" id="angleSlider" min="0" max="6" step="1" value="0">
-            <div class="slider-labels">
-                <span>270</span><span>180</span><span>90</span><span>60</span><span>45</span><span>30</span><span>0</span>
-            </div>
+        <input type="range" id="angleSlider" min="0" max="7" step="1" value="0" style="width: 80%; margin-top: 20px;">
+        <div style="display: flex; justify-content: space-between; direction: ltr; width: 80%; margin: 10px auto; font-size: 12px;">
+            <span>360</span><span>270</span><span>180</span><span>90</span><span>60</span><span>45</span><span>30</span><span>0</span>
         </div>
     </section>
 
-    <section class="math-relations">
-        <div class="rel-card blue-border">
-            <p>To find Tangent:</p>
-            <p>tan(θ) = sin(θ) / cos(θ)</p>
-        </div>
-        <div class="rel-card orange-border">
-            <p>To find Sine:</p>
-            <p>sin(θ) = tan(θ) × cos(θ)</p>
-        </div>
-        <div class="rel-card purple-border">
-            <p>To find Cosine:</p>
-            <p>cos(θ) = sin(θ) / tan(θ)</p>
-        </div>
-    </section>
+    <table class="values-table">
+        <thead>
+            <tr>
+                <th>الزاوية</th>
+                <th>sin</th>
+                <th>cos</th>
+                <th>tan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>0° / 360°</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>30°</td><td>1/2</td><td>√3/2</td><td>1/√3</td></tr>
+            <tr><td>45°</td><td>1/√2</td><td>1/√2</td><td>1</td></tr>
+            <tr><td>60°</td><td>√3/2</td><td>1/2</td><td>√3</td></tr>
+            <tr><td>90°</td><td>1</td><td>0</td><td>غير معرف</td></tr>
+        </tbody>
+    </table>
 
     <section class="laws-grid">
-        <div class="law-card blue">sin = المقابل / الوتر</div>
-        <div class="law-card orange">cos = المجاور / الوتر</div>
-        <div class="law-card purple">tan = sin / cos</div>
-        <div class="law-card red">csc = 1 / sin</div>
-        <div class="law-card green">sec = 1 / cos</div>
-        <div class="law-card teal">cot = 1 / tan</div>
+        <div class="law-card" style="background:#1976d2;">sin = المقابل / الوتر</div>
+        <div class="law-card" style="background:#f57c00;">cos = المجاور / الوتر</div>
+        <div class="law-card" style="background:#8e24aa;">tan = sin / cos</div>
+        <div class="law-card" style="background:#e53935;">csc = 1 / sin</div>
+        <div class="law-card" style="background:#43a047;">sec = 1 / cos</div>
+        <div class="law-card" style="background:#00897b;">cot = 1 / tan</div>
     </section>
 
-    <div style="background:#fff9c4;padding:15px;border-radius:10px;margin-top:20px; text-align: center;">
-        <strong>💡 نصيحة:</strong>
-        <p>قم بحفظ الجدول والقوانين جيداً ثم اختبر نفسك</p>
+    <div style="text-align: center; margin-top: 30px;">
         <a href="test.html" class="btn">انتقل للاختبار</a>
     </div>
 </main>
 
-<footer><p>© 2026 MRπ</p></footer>
+<footer>
+    <p>MRπ 2026 ©</p>
+    <p style="margin-top: 10px; font-weight: bold;">تم تصميم الموقع بواسطة أيمن وأمير</p>
+</footer>
 
 <script>
     const slider = document.getElementById('angleSlider');
     const vector = document.getElementById('vector');
     const angleText = document.getElementById('angleText');
-    const radText = document.getElementById('radText');
+    const sinVal = document.getElementById('sinVal');
+    const cosVal = document.getElementById('cosVal');
 
-    const angles = [
-        { deg: 0, rad: "0" },
-        { deg: 30, rad: "π/6" },
-        { deg: 45, rad: "π/4" },
-        { deg: 60, rad: "π/3" },
-        { deg: 90, rad: "π/2" },
-        { deg: 180, rad: "π" },
-        { deg: 270, rad: "3π/2" }
+    const data = [
+        { deg: 0, sin: "0", cos: "1" },
+        { deg: 30, sin: "1/2", cos: "√3/2" },
+        { deg: 45, sin: "1/√2", cos: "1/√2" },
+        { deg: 60, sin: "√3/2", cos: "1/2" },
+        { deg: 90, sin: "1", cos: "0" },
+        { deg: 180, sin: "0", cos: "-1" },
+        { deg: 270, sin: "-1", cos: "0" },
+        { deg: 360, sin: "0", cos: "1" }
     ];
 
     slider.addEventListener('input', () => {
-        const selected = angles[slider.value];
-        angleText.innerText = `الزاوية: ${selected.deg}°`;
-        radText.innerText = `rad: ${selected.rad}`;
-        vector.style.transform = `translateY(-50%) rotate(${-selected.deg}deg)`;
+        const d = data[slider.value];
+        angleText.innerText = d.deg === 0 ? "الزاوية: 0° + 360°" : `الزاوية: ${d.deg}°`;
+        sinVal.innerText = `sin: ${d.sin}`;
+        cosVal.innerText = `cos: ${d.cos}`;
+        vector.style.transform = `translateY(-50%) rotate(${-d.deg}deg)`;
     });
 </script>
 </body>
