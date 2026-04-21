@@ -54,13 +54,18 @@ body {
     height: 400px;
     overflow-y: auto;
     background: #f5f7fa;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
     margin: 8px 0;
     padding: 10px 14px;
     border-radius: 12px;
-    max-width: 80%;
+    max-width: 85%;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .user-msg {
@@ -73,6 +78,8 @@ body {
     background: #e0e0e0;
     color: #000;
     align-self: flex-start;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 /* الإدخال */
@@ -126,7 +133,7 @@ button.send {
 <script>
 const API_URL = "https://de7df210-7b1f-45e5-991b-78a241430346-00-2sx1tcedrlb5r.worf.replit.dev/api/chat";
 
-/* زر الرجوع */
+/* رجوع */
 function goBack() {
     window.history.back();
 }
@@ -160,7 +167,10 @@ function addMessage(text, className) {
     const box = document.getElementById("chatBox");
     const msg = document.createElement("div");
     msg.className = "message " + className;
+
     msg.innerText = text;
+    msg.style.whiteSpace = "pre-wrap"; // مهم لعرض النص الطويل
+
     box.appendChild(msg);
     box.scrollTop = box.scrollHeight;
 }
