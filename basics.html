@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شرح الدوال المثلثية</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.explain-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    max-width:900px;
+    margin:20px auto;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.triangle{
+    width:0;
+    height:0;
+    border-left:100px solid transparent;
+    border-right:0 solid transparent;
+    border-bottom:150px solid #1976d2;
+    margin:40px auto;
+    transition:0.5s;
+}
+
+.side{
+    margin-top:10px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+    <div class="logo">MRπ</div>
+    <nav><a href="learn.html">رجوع</a></nav>
+</header>
+
+<div class="explain-box">
+
+<h2>ما هي sin و cos و tan ؟</h2>
+
+<p>الدوال تعتمد على مثلث قائم الزاوية:</p>
+
+<div class="triangle" id="triangle"></div>
+
+<p class="side">sin = المقابل / الوتر</p>
+<p class="side">cos = المجاور / الوتر</p>
+<p class="side">tan = المقابل / المجاور</p>
+
+<!-- 🔥 أزرار تفاعلية -->
+<div style="margin-top:20px;">
+    <button class="btn" onclick="changeTriangle(1)">زاوية صغيرة</button>
+    <button class="btn" onclick="changeTriangle(2)">زاوية متوسطة</button>
+    <button class="btn" onclick="changeTriangle(3)">زاوية كبيرة</button>
+</div>
+
+</div>
+
+<script>
+function changeTriangle(type){
+    const t = document.getElementById("triangle");
+
+    if(type === 1){
+        t.style.borderBottom = "80px solid #1976d2";
+    }
+    if(type === 2){
+        t.style.borderBottom = "150px solid #1976d2";
+    }
+    if(type === 3){
+        t.style.borderBottom = "220px solid #1976d2";
+    }
+}
+</script>
+
+</body>
+</html>
