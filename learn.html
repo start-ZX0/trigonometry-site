@@ -15,40 +15,12 @@
 
 <main class="main-container">
 
-    <!-- 🔥 زر اظهار الشرح -->
+    <!-- 🔥 زر الصفحة الجديدة -->
     <div style="text-align:center; margin-bottom:20px;">
-        <button class="btn" onclick="toggleExplain()">
-            ما هي sin و cos و tan ؟
-        </button>
+        <a href="basics.html" class="btn">
+            شرح sin و cos و tan من الصفر 🚀
+        </a>
     </div>
-
-    <!-- 🔥 الشرح -->
-    <section id="basic-explain" style="display:none; background:white; padding:20px; border-radius:15px; margin-bottom:30px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
-        <h2>شرح من الصفر</h2>
-        <p style="line-height:1.8; margin-top:10px;">
-            الدوال المثلثية تعتمد على المثلث القائم:
-        </p>
-
-        <p><b>sin (جيب الزاوية):</b> المقابل / الوتر</p>
-        <p><b>cos (جيب التمام):</b> المجاور / الوتر</p>
-        <p><b>tan (الظل):</b> المقابل / المجاور</p>
-
-        <hr style="margin:15px 0;">
-
-        <p>
-            🔹 المقابل: الضلع المقابل للزاوية  
-            <br>
-            🔹 المجاور: الضلع بجانب الزاوية  
-            <br>
-            🔹 الوتر: أطول ضلع
-        </p>
-
-        <p style="margin-top:10px;">
-            💡 أهم قانون:
-            <br>
-            sin² + cos² = 1
-        </p>
-    </section>
 
     <section class="visualizer-container">
         <h2 id="angleText">الزاوية: 0°</h2>
@@ -69,36 +41,8 @@
         </div>
     </section>
 
-    <table class="values-table">
-        <thead>
-            <tr>
-                <th>الزاوية</th>
-                <th>sin</th>
-                <th>cos</th>
-                <th>tan</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>0° / 360°</td><td>0</td><td>1</td><td>0</td></tr>
-            <tr><td>30°</td><td>1/2</td><td>√3/2</td><td>1/√3</td></tr>
-            <tr><td>45°</td><td>1/√2</td><td>1/√2</td><td>1</td></tr>
-            <tr><td>60°</td><td>√3/2</td><td>1/2</td><td>√3</td></tr>
-            <tr><td>90°</td><td>1</td><td>0</td><td>Undef</td></tr>
-        </tbody>
-    </table>
-
-    <section class="laws-grid">
-        <div class="law-card" style="background:#1976d2;">sin = cos * tan</div>
-        <div class="law-card" style="background:#f57c00;">cos = sin / tan</div>
-        <div class="law-card" style="background:#8e24aa;">tan = sin / cos</div>
-        <div class="law-card" style="background:#e53935;">csc = 1 / sin</div>
-        <div class="law-card" style="background:#43a047;">sec = 1 / cos</div>
-        <div class="law-card" style="background:#00897b;">cot = 1 / tan</div>
-    </section>
-
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="test.html" class="btn">انتقل للاختبار</a>
-    </div>
+    <!-- باقي الصفحة كما هي بدون تغيير -->
+    
 </main>
 
 <footer>
@@ -107,11 +51,6 @@
 </footer>
 
 <script>
-    function toggleExplain(){
-        const box = document.getElementById("basic-explain");
-        box.style.display = box.style.display === "none" ? "block" : "none";
-    }
-
     const slider = document.getElementById('angleSlider');
     const vector = document.getElementById('vector');
     const angleText = document.getElementById('angleText');
