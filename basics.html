@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>شرح تفاعلي متقدم</title>
+<title>محاكي الدوال المثلثية</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
-.canvas-box{
+.sim-box{
     background:white;
     padding:25px;
     border-radius:15px;
@@ -23,8 +23,9 @@ canvas{
     margin-top:20px;
 }
 
-.controls{
-    margin-top:20px;
+.values{
+    margin-top:15px;
+    font-weight:bold;
 }
 </style>
 
@@ -36,96 +37,107 @@ canvas{
     <nav><a href="learn.html">رجوع</a></nav>
 </header>
 
-<div class="canvas-box">
+<div class="sim-box">
 
 <h2>محاكي الدوال المثلثية 🔥</h2>
+<p>حرّك الزاوية وشاهد sin و cos و tan مباشرة</p>
 
-<p>حرّك الزاوية وشاهد sin و cos مباشرة</p>
+<canvas id="c" width="320" height="320"></canvas>
 
-<canvas id="circleCanvas" width="300" height="300"></canvas>
-
-<div class="math-display">
-    <span id="sinVal">sin: 0</span> |
-    <span id="cosVal">cos: 1</span>
+<div class="values">
+    <span id="sinV">sin: 0</span> |
+    <span id="cosV">cos: 1</span> |
+    <span id="tanV">tan: 0</span>
 </div>
 
-<input type="range" id="angleSlider" min="0" max="360" value="0" style="width:80%;">
+<input type="range" id="slider" min="0" max="360" value="0" style="width:80%;">
 
-<div class="controls">
-    <button class="btn" onclick="setAngle(30)">30°</button>
-    <button class="btn" onclick="setAngle(45)">45°</button>
-    <button class="btn" onclick="setAngle(60)">60°</button>
-    <button class="btn" onclick="setAngle(90)">90°</button>
+<div style="margin-top:15px;">
+    <button class="btn" onclick="setA(30)">30°</button>
+    <button class="btn" onclick="setA(45)">45°</button>
+    <button class="btn" onclick="setA(60)">60°</button>
+    <button class="btn" onclick="setA(90)">90°</button>
 </div>
 
 </div>
 
 <script>
-const canvas = document.getElementById("circleCanvas");
-const ctx = canvas.getContext("2d");
+const c = document.getElementById("c");
+const ctx = c.getContext("2d");
 
-const centerX = 150;
-const centerY = 150;
-const radius = 100;
+const cx = 160;
+const cy = 160;
+const r = 110;
 
-const slider = document.getElementById("angleSlider");
-const sinText = document.getElementById("sinVal");
-const cosText = document.getElementById("cosVal");
+const slider = document.getElementById("slider");
 
-function draw(angleDeg){
-    ctx.clearRect(0,0,300,300);
+function draw(deg){
+    ctx.clearRect(0,0,320,320);
 
     // دائرة
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI*2);
+    ctx.arc(cx,cy,r,0,Math.PI*2);
     ctx.stroke();
 
-    let angle = angleDeg * Math.PI / 180;
+    let rad = deg * Math.PI/180;
 
-    let x = centerX + radius * Math.cos(angle);
-    let y = centerY - radius * Math.sin(angle);
+    let x = cx + r*Math.cos(rad);
+    let y = cy - r*Math.sin(rad);
 
-    // خط الوتر
+    // الوتر
     ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
+    ctx.moveTo(cx,cy);
     ctx.lineTo(x,y);
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle="red";
     ctx.stroke();
 
-    // cos (افقي)
+    // cos
     ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.lineTo(x, centerY);
-    ctx.strokeStyle = "blue";
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(x,cy);
+    ctx.strokeStyle="blue";
     ctx.stroke();
 
-    // sin (عمودي)
+    // sin
     ctx.beginPath();
-    ctx.moveTo(x, centerY);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = "green";
+    ctx.moveTo(x,cy);
+    ctx.lineTo(x,y);
+    ctx.strokeStyle="green";
     ctx.stroke();
+
+    // tan (امتداد)
+    let tx = cx + r;
+    let ty = cy - r*Math.tan(rad);
+
+    if(Math.abs(Math.tan(rad)) < 5){
+        ctx.beginPath();
+        ctx.moveTo(cx+r,cy);
+        ctx.lineTo(tx,ty);
+        ctx.strokeStyle="purple";
+        ctx.stroke();
+    }
 
     // نقطة
     ctx.beginPath();
     ctx.arc(x,y,5,0,Math.PI*2);
     ctx.fill();
 
-    // تحديث القيم
-    sinText.innerText = "sin: " + Math.sin(angle).toFixed(2);
-    cosText.innerText = "cos: " + Math.cos(angle).toFixed(2);
+    // قيم
+    document.getElementById("sinV").innerText = "sin: " + Math.sin(rad).toFixed(2);
+    document.getElementById("cosV").innerText = "cos: " + Math.cos(rad).toFixed(2);
+
+    let tanVal = Math.tan(rad);
+    document.getElementById("tanV").innerText =
+        Math.abs(tanVal) > 10 ? "tan: ∞" : "tan: " + tanVal.toFixed(2);
 }
 
-slider.addEventListener("input", ()=>{
-    draw(slider.value);
-});
+slider.oninput = ()=> draw(slider.value);
 
-function setAngle(val){
-    slider.value = val;
-    draw(val);
+function setA(v){
+    slider.value = v;
+    draw(v);
 }
 
-// أول تشغيل
 draw(0);
 </script>
 
