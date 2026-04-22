@@ -14,6 +14,42 @@
 </header>
 
 <main class="main-container">
+
+    <!-- 🔥 زر اظهار الشرح -->
+    <div style="text-align:center; margin-bottom:20px;">
+        <button class="btn" onclick="toggleExplain()">
+            ما هي sin و cos و tan ؟
+        </button>
+    </div>
+
+    <!-- 🔥 الشرح -->
+    <section id="basic-explain" style="display:none; background:white; padding:20px; border-radius:15px; margin-bottom:30px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+        <h2>شرح من الصفر</h2>
+        <p style="line-height:1.8; margin-top:10px;">
+            الدوال المثلثية تعتمد على المثلث القائم:
+        </p>
+
+        <p><b>sin (جيب الزاوية):</b> المقابل / الوتر</p>
+        <p><b>cos (جيب التمام):</b> المجاور / الوتر</p>
+        <p><b>tan (الظل):</b> المقابل / المجاور</p>
+
+        <hr style="margin:15px 0;">
+
+        <p>
+            🔹 المقابل: الضلع المقابل للزاوية  
+            <br>
+            🔹 المجاور: الضلع بجانب الزاوية  
+            <br>
+            🔹 الوتر: أطول ضلع
+        </p>
+
+        <p style="margin-top:10px;">
+            💡 أهم قانون:
+            <br>
+            sin² + cos² = 1
+        </p>
+    </section>
+
     <section class="visualizer-container">
         <h2 id="angleText">الزاوية: 0°</h2>
         <div class="math-display">
@@ -71,6 +107,11 @@
 </footer>
 
 <script>
+    function toggleExplain(){
+        const box = document.getElementById("basic-explain");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
     const slider = document.getElementById('angleSlider');
     const vector = document.getElementById('vector');
     const angleText = document.getElementById('angleText');
@@ -96,5 +137,6 @@
         vector.style.transform = `translateY(-50%) rotate(${-d.deg}deg)`;
     });
 </script>
+
 </body>
 </html>
